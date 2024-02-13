@@ -197,11 +197,15 @@
                 <ul class="dropdown-menu dropdown-menu-end show" 
                     style="position: absolute; inset: 0px 0px auto auto; margin: 0px; transform: translate3d(-31px, 27px, 0px);" 
                     data-popper-placement="bottom-end">
+                  
                     <li>
                         <a href="#" class="dropdown-item edit-list" onclick="openModal('{{ $project->id }}', '{{ $project->projectName }}', '{{ $project->dueDate }}', '{{ $project->status }}', '{{ $project->team }}')">
                             <i class="mdi mdi-pencil font-size-16 text-success me-1"></i> Edit
                         </a>
-                    </li>
+                    </li> 
+ 
+
+
                     <li>
                     <li><a href="{{ url('delete/'.$project->id) }}" class="dropdown-item remove-list"  >
                             <i class="mdi mdi-trash-can font-size-16 text-danger me-1"></i> Remove

@@ -187,7 +187,8 @@
                         <li><a href="projects-grid" key="t-p-grid">@lang('translation.Projects_Grid')</a></li>
                         <li><a href="projects-list" key="t-p-list">@lang('translation.Projects_List')</a></li>
                         <li><a href="arifurtable" key="arifurtable-list">@lang('translation.arifurtable')</a></li>
-                     
+         
+                        <li><a href="arifurcontract" key="arifurcontract-list">@lang('translation.arifurcontract')</a></li> 
                         <li><a href="projects-overview" key="t-p-overview">@lang('translation.Project_Overview')</a>
                         </li>
                         <li><a href="projects-create" key="t-create-new">@lang('translation.Create_New')</a></li>

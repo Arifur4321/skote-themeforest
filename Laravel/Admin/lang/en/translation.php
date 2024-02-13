@@ -60,6 +60,7 @@ return [
   "Projects_Grid" => "Projects Grid",
   "Projects_List" => "Projects List",
   "arifurtable" => "arifurtable",
+  "arifurcontract" => "arifurcontract",
   "Project_Overview" => "Project Overview",
   "Create_New" => "Create New",
   "Tasks" => "Tasks",

@@ -187,7 +187,8 @@
                         <li><a href="projects-grid" key="t-p-grid"><?php echo app('translator')->get('translation.Projects_Grid'); ?></a></li>
                         <li><a href="projects-list" key="t-p-list"><?php echo app('translator')->get('translation.Projects_List'); ?></a></li>
                         <li><a href="arifurtable" key="arifurtable-list"><?php echo app('translator')->get('translation.arifurtable'); ?></a></li>
-                     
+         
+                        <li><a href="arifurcontract" key="arifurcontract-list"><?php echo app('translator')->get('translation.arifurcontract'); ?></a></li> 
                         <li><a href="projects-overview" key="t-p-overview"><?php echo app('translator')->get('translation.Project_Overview'); ?></a>
                         </li>
                         <li><a href="projects-create" key="t-create-new"><?php echo app('translator')->get('translation.Create_New'); ?></a></li>

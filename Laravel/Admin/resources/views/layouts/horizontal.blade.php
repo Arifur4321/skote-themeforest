@@ -557,6 +557,8 @@
                                     <a href="projects-grid" class="dropdown-item" key="t-p-grid">@lang('translation.Projects_Grid')</a>
                                     <a href="projects-list" class="dropdown-item" key="t-p-list">@lang('translation.Projects_List')</a>
                                     <a href="arifurtable"  class="dropdown-item" key="arifurtable-list">@lang('translation.arifurtable')</a> 
+                                    
+                                    <a href="arifurcontract"  class="dropdown-item" key="arifurcontract-list">@lang('translation.arifurcontract')</a>  
                                     <a href="projects-overview" class="dropdown-item" key="t-p-overview">@lang('translation.Project_Overview')</a>
                                     <a href="projects-create" class="dropdown-item" key="t-create-new">@lang('translation.Create_New')</a>
                                 </div>
