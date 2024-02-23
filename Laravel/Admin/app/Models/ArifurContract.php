@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 
 
 
-class ArifurContract extends Model
+class createcontract extends Model
 {
     use HasFactory;
 

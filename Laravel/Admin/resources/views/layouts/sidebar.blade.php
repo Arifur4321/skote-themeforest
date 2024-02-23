@@ -185,10 +185,22 @@
                     </a>
                     <ul class="sub-menu" aria-expanded="false">
                         <li><a href="projects-grid" key="t-p-grid">@lang('translation.Projects_Grid')</a></li>
+                        
                         <li><a href="projects-list" key="t-p-list">@lang('translation.Projects_List')</a></li>
-                        <li><a href="arifurtable" key="arifurtable-list">@lang('translation.arifurtable')</a></li>
+
+                        <li><a href="/arifurtable" key="arifurtable-list">@lang('translation.arifurtable')</a></li>
          
-                        <li><a href="arifurcontract" key="arifurcontract-list">@lang('translation.arifurcontract')</a></li> 
+                        <li><a href="/createcontract" key="createcontract-list">@lang('translation.createcontract')</a></li> 
+                        
+                        <li><a href="/Contract-List" key="Contract-List">@lang('translation.Contract-List')</a></li>
+
+                        
+                        <li><a href="Edit-Contract-List" key="Edit-Contract-List">@lang('translation.Edit-Contract-List')</a></li>  
+
+                        <li><a href="/Product-List" key="Product-List">@lang('translation.Product-List')</a></li>
+                        
+                        <li><a href="/Variable-List" key="Variable-List">@lang('translation.Variable-List')</a></li>   
+
                         <li><a href="projects-overview" key="t-p-overview">@lang('translation.Project_Overview')</a>
                         </li>
                         <li><a href="projects-create" key="t-create-new">@lang('translation.Create_New')</a></li>

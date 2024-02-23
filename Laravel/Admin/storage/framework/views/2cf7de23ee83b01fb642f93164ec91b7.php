@@ -185,10 +185,22 @@
                     </a>
                     <ul class="sub-menu" aria-expanded="false">
                         <li><a href="projects-grid" key="t-p-grid"><?php echo app('translator')->get('translation.Projects_Grid'); ?></a></li>
+                        
                         <li><a href="projects-list" key="t-p-list"><?php echo app('translator')->get('translation.Projects_List'); ?></a></li>
-                        <li><a href="arifurtable" key="arifurtable-list"><?php echo app('translator')->get('translation.arifurtable'); ?></a></li>
+
+                        <li><a href="/arifurtable" key="arifurtable-list"><?php echo app('translator')->get('translation.arifurtable'); ?></a></li>
          
-                        <li><a href="arifurcontract" key="arifurcontract-list"><?php echo app('translator')->get('translation.arifurcontract'); ?></a></li> 
+                        <li><a href="/createcontract" key="createcontract-list"><?php echo app('translator')->get('translation.createcontract'); ?></a></li> 
+                        
+                        <li><a href="/Contract-List" key="Contract-List"><?php echo app('translator')->get('translation.Contract-List'); ?></a></li>
+
+                        
+                        <li><a href="Edit-Contract-List" key="Edit-Contract-List"><?php echo app('translator')->get('translation.Edit-Contract-List'); ?></a></li>  
+
+                        <li><a href="/Product-List" key="Product-List"><?php echo app('translator')->get('translation.Product-List'); ?></a></li>
+                        
+                        <li><a href="/Variable-List" key="Variable-List"><?php echo app('translator')->get('translation.Variable-List'); ?></a></li>   
+
                         <li><a href="projects-overview" key="t-p-overview"><?php echo app('translator')->get('translation.Project_Overview'); ?></a>
                         </li>
                         <li><a href="projects-create" key="t-create-new"><?php echo app('translator')->get('translation.Create_New'); ?></a></li>
