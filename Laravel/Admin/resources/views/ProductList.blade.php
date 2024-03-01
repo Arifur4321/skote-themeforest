@@ -64,6 +64,36 @@
 </div>
 
 
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Edit Variable</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form id="editVariableForm">
+          <input type="hidden" id="variable-id">
+          <div class="mb-3">
+            <label for="variable-name" class="form-label">Name</label>
+            <input type="text" class="form-control" id="variable-name" required>
+          </div>
+     
+          <div class="mb-3">
+            <label for="description" class="form-label">Description</label>
+            <textarea class="form-control" id="description" required></textarea>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary" onclick="editVariable()">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>
+
 
 
 <script>
@@ -113,9 +143,6 @@ function saveProduct() {
 
 </script>
 
-
-
-
 <!-- arifur for search -->
 <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
 <script>
@@ -143,6 +170,53 @@ function saveProduct() {
     }
 
     $('#exampleModalNew').modal('hide');
+
+
+    function openModal(variableID, variableName,description) {
+    // Using Bootstrap's JavaScript to open the modal
+            var myModal = new bootstrap.Modal(document.getElementById('exampleModal'));
+            myModal.show();
+
+            // Set values in the modal form
+            document.getElementById('variable-id').value = variableID;
+            document.getElementById('variable-name').value = variableName;
+            
+            document.getElementById('description').value = description;
+        }
+
+        // AJAX method to handle form submission for editing
+        function editVariable() {
+            var variableID = document.getElementById('variable-id').value;
+            var variableName = document.getElementById('variable-name').value;
+           
+            var description = document.getElementById('description').value;
+
+            var csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
+
+            $.ajax({
+                url: '/edit-variable/' + variableID,
+                type: 'POST',
+                headers: {
+                    'X-CSRF-TOKEN': csrfToken
+                },
+                data: {
+                    product_name: variableName,
+               
+                    description: description
+                },
+                success: function(response) {
+                    // Handle success response
+                    console.log(response);
+                    location.reload();
+                },
+                error: function(error) {
+                    // Handle error response
+                    console.error('Error editing variable:', error.responseText);
+                }
+            });
+        }
+
+
 </script>
 
 
@@ -225,7 +299,9 @@ function saveProduct() {
             <ul class="dropdown-menu dropdown-menu-end show" style="position: absolute; inset: 0px 0px auto auto; margin: 0px; transform: translate3d(-31px, 27px, 0px);" data-popper-placement="bottom-end">
                 <!-- Edit Button -->
                 <li>
-                    <a href="#" class="dropdown-item edit-list" onclick="openEditModal('{{ $contract->id }}')">
+                    <a href="#" class="dropdown-item edit-list"  
+                    onclick="openModal('{{  $contract->id}}', '{{ $contract->product_name }}',
+                     '{{ $contract->description }}')">
                         <i class="mdi mdi-pencil font-size-16 text-success me-1"></i> Edit
                     </a>
                 </li>
@@ -237,12 +313,26 @@ function saveProduct() {
                 </li>-->
                 <!-- Delete Button -->
                 <li>
-                    <form action="" method="POST">
-                      
-                        <button type="submit" class="dropdown-item remove-list">
-                            <i class="mdi mdi-trash-can font-size-16 text-danger me-1"></i> Delete
-                        </button>
-                    </form>
+                <form id="deleteForm-{{  $contract->id}}" action="{{ route('product.delete',  $contract->id) }}" method="POST">
+                    @csrf
+                    @method('POST')
+                    <a href="#" class="dropdown-item edit-list" onclick="confirmDelete('{{  $contract->id}}');">
+                        <i class="mdi mdi-trash-can font-size-16 text-danger me-1"></i> Delete
+                    </a>
+                    <!-- JavaScript for confirmation popup -->
+                    <script>
+                        function confirmDelete(contractId) {
+                            // Display confirmation popup
+                            if (confirm('Are you sure you want to delete this contract?')) {
+                                // If user clicks 'Yes', submit the form
+                                document.getElementById('deleteForm-' + contractId).submit();
+                            } else {
+                                // If user clicks 'No', do nothing
+                                return false;
+                            }
+                        }
+                    </script>
+                </form>
                 </li>
             </ul>
         </div>

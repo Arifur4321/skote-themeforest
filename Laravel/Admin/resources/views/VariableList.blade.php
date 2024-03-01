@@ -102,6 +102,7 @@
         success: function (response) {
             console.log('Data saved successfully.');
             $('#exampleModalNew').modal('hide');
+            location.reload();
         },
         error: function (error) {
             console.error('Error saving data:', error);
@@ -111,12 +112,6 @@
 
 
 </script>
-
-
-
- 
- 
-
 
 
     <!-- for table -->
@@ -151,13 +146,13 @@
         <div class="dropdown-menu dropdown-menu-end">
             <ul class="dropdown-menu dropdown-menu-end show" style="position: absolute; inset: 0px 0px auto auto; margin: 0px; transform: translate3d(-31px, 27px, 0px);" data-popper-placement="bottom-end">
                 <!-- Edit Button -->
-                <li>
+                
                    
                 <a href="#" class="dropdown-item edit-list" onclick="openModal('{{ $contract->VariableID }}', '{{ $contract->VariableName }}', '{{ $contract->VariableType }}', '{{ $contract->Description }}')">
                     <i class="mdi mdi-pencil font-size-16 text-success me-1"></i> Edit
                 </a>
 
-                </li>
+                
                 <!-- History Button 
                 <li>
                     <a href="" class="dropdown-item">
@@ -165,25 +160,39 @@
                     </a>
                 </li>-->
                 <!-- Delete Button -->
-                <li>
-                    <form action="" method="POST">
-                      
-                        <button type="submit" class="dropdown-item remove-list">
-                            <i class="mdi mdi-trash-can font-size-16 text-danger me-1"></i> Delete
-                        </button>
-                    </form>
-                </li>
+                
+                <form id="deleteForm-{{ $contract->VariableID }}" action="{{ route('contract.delete', $contract->VariableID) }}" method="POST">
+                    @csrf
+                    @method('POST')
+                    <a href="#" class="dropdown-item edit-list" onclick="confirmDelete('{{ $contract->VariableID }}');">
+                        <i class="mdi mdi-trash-can font-size-16 text-danger me-1"></i> Delete
+                    </a>
+                    <!-- JavaScript for confirmation popup -->
+                    <script>
+                        function confirmDelete(contractId) {
+                            // Display confirmation popup
+                            if (confirm('Are you sure you want to delete this contract?')) {
+                                // If user clicks 'Yes', submit the form
+                                document.getElementById('deleteForm-' + contractId).submit();
+                            } else {
+                                // If user clicks 'No', do nothing
+                                return false;
+                            }
+                        }
+                    </script>
+                </form>
+
+
             </ul>
         </div>
     </div>
 </td>
-
         </tr>
  
         @endforeach
     </tbody>
 </table>
-
+ 
 
  
 <!-- edit Modal -->
@@ -271,7 +280,7 @@
                 // Handle success, for example, close the modal
                 var myModal = new bootstrap.Modal(document.getElementById('exampleModal'));
                 myModal.hide();
-                // You can perform additional actions here if needed
+                location.reload();
             },
             error: function (error) {
                 // Handle error

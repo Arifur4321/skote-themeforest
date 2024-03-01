@@ -17,8 +17,28 @@ class VariableListController extends Controller
         //return view('ProductList', compact('products'));
         //return view('variable-list.index', compact('variables'));
     }
+    
+    public function deleteContract($id)
+    {
+        $variable = VariableList::findOrFail($id); // Find the variable by ID
+        $variable->delete(); // Delete the variable
+        return redirect()->back()->with('success', 'Variable deleted successfully'); // Redirect back with success message
+    }
 
-
+    public function destroy($id)
+        {
+            $variable = Variable::find($id);
+            
+            if (!$variable) {
+                return redirect()->back()->with('error', 'Variable not found.');
+            }
+            
+            $variable->delete();
+            
+            return redirect()->back()->with('success', 'Variable deleted successfully.');
+        }
+ 
+    
     public function updateVariable(Request $request, $id)
     {
         // Validate the request data
@@ -44,7 +64,8 @@ class VariableListController extends Controller
         $variable->save();
     
         // Return a response indicating success
-        return response()->json(['message' => 'Variable updated successfully']);
+        return response()->json(['success' => true, 'message' => 'Variable updated successfully']);
+ 
     }
     
 

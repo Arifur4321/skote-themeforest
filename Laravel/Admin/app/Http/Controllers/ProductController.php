@@ -16,10 +16,12 @@ class ProductController extends Controller
         return view('ProductList', compact('products'));
     }
 
-    public function productforcreatepage()
+
+    public function deleteproduct($id)
     {
-        $products = Product::all(); // Retrieve all products from the database to pass createcontract
-        return view('createcontract', compact('products'));
+        $Product = Product::findOrFail($id); // Find the variable by ID
+        $Product->delete(); // Delete the variable
+        return redirect()->back()->with('success', 'Variable deleted successfully'); // Redirect back with success message
     }
 
     public function saveProduct(Request $request)
@@ -46,6 +48,36 @@ class ProductController extends Controller
 
     // Optionally, you can return a response or redirect to another page
     return response()->json(['message' => 'Product saved successfully']);
+    }
+
+ 
+    public function update(Request $request, $id)
+    {
+        // Validate the request data
+        $request->validate([
+            'product_name' => 'required|string',
+            'description' => 'required|string',
+            
+        ]);
+    
+        // Find the variable by ID
+        $Product = Product::findOrFail($id);
+    
+        // Update variable details
+        $Product->product_name = $request->input('product_name');
+        $Product->description = $request->input('description');
+    
+        // Check if Description field is provided
+        if ($request->has('description')) {
+            $Product->description = $request->input('description');
+        }
+    
+        // Save the updated variable
+        $Product->save();
+    
+        // Return a response indicating success
+        return response()->json(['success' => true, 'message' => 'Variable updated successfully']);
+ 
     }
 
 }

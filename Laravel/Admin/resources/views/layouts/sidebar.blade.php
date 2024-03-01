@@ -10,11 +10,11 @@
                 <li class="menu-title" key="t-menu">@lang('translation.Menu')</li>
 
                 <li>
-                    <a href="javascript: void(0);" class="has-arrow waves-effect">
+                    <!-- <a href="javascript: void(0);" class="has-arrow waves-effect">
                         <i class="bx bx-home-circle"></i>
                         <span key="t-dashboards">@lang('translation.Dashboards')</span>
-                    </a>
-                    <ul class="sub-menu" aria-expanded="false">
+                    </a> -->
+                    <!-- <ul class="sub-menu" aria-expanded="false">
                         <li><a href="index" key="t-default">@lang('translation.Default')</a></li>
                         <li><a href="dashboard-saas" key="t-saas">@lang('translation.Saas')</a></li>
                         <li><a href="dashboard-crypto" key="t-crypto">@lang('translation.Crypto')</a></li>
@@ -176,7 +176,7 @@
                         <li><a href="invoices-detail" key="t-invoice-detail">@lang('translation.Invoice_Detail')</a>
                         </li>
                     </ul>
-                </li>
+                </li> -->
 
                 <li>
                     <a href="javascript: void(0);" class="has-arrow waves-effect">
@@ -184,11 +184,11 @@
                         <span key="t-projects">@lang('translation.Projects')</span>
                     </a>
                     <ul class="sub-menu" aria-expanded="false">
-                        <li><a href="projects-grid" key="t-p-grid">@lang('translation.Projects_Grid')</a></li>
+                        <!-- <li><a href="projects-grid" key="t-p-grid">@lang('translation.Projects_Grid')</a></li>
                         
                         <li><a href="projects-list" key="t-p-list">@lang('translation.Projects_List')</a></li>
 
-                        <li><a href="/arifurtable" key="arifurtable-list">@lang('translation.arifurtable')</a></li>
+                        <li><a href="/arifurtable" key="arifurtable-list">@lang('translation.arifurtable')</a></li> -->
          
                         <li><a href="/createcontract" key="createcontract-list">@lang('translation.createcontract')</a></li> 
                         
@@ -200,14 +200,15 @@
                         <li><a href="/Product-List" key="Product-List">@lang('translation.Product-List')</a></li>
                         
                         <li><a href="/Variable-List" key="Variable-List">@lang('translation.Variable-List')</a></li>   
+                        <li><a href="/HeaderAndFooter" key="HeaderAndFooter">@lang('translation.HeaderAndFooter')</a></li>   
 
-                        <li><a href="projects-overview" key="t-p-overview">@lang('translation.Project_Overview')</a>
+                        <!-- <li><a href="projects-overview" key="t-p-overview">@lang('translation.Project_Overview')</a>
                         </li>
-                        <li><a href="projects-create" key="t-create-new">@lang('translation.Create_New')</a></li>
+                        <li><a href="projects-create" key="t-create-new">@lang('translation.Create_New')</a></li> -->
                     </ul>
                 </li>
 
-                <li>
+                <!-- <li>
                     <a href="javascript: void(0);" class="has-arrow waves-effect">
                         <i class="bx bx-task"></i>
                         <span key="t-tasks">@lang('translation.Tasks')</span>
@@ -446,7 +447,7 @@
                             </ul>
                         </li>
                     </ul>
-                </li>
+                </li> -->
 
             </ul>
         </div>

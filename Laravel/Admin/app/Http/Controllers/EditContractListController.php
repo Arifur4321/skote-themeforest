@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Contract;
 use App\Models\VariableList; 
+use App\Models\Product;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 
@@ -22,7 +23,8 @@ class EditContractListController extends Controller
        
         $contract = Contract::findOrFail($id);
         $variables = VariableList::all();
-        return view('Edit-ContractList', compact('contract', 'variables'));
+        $products = Product::all(); 
+        return view('Edit-ContractList', compact('contract', 'variables', 'products'));
     }
     public function updateContract(Request $request)
     {

@@ -37,19 +37,43 @@ Route::get('index/{locale}', [App\Http\Controllers\HomeController::class, 'lang'
  
 Route::post('/save-project', [App\Http\Controllers\ProjectController::class, 'saveProject']);
 
-// for edit 
-//Route::post('/edit-project/{id}', 'ProjectController@editProject')->name('edit-project');
+Route::post('/edit-variable/{id}', [App\Http\Controllers\ProductController::class, 'update'])->name('edit-variable');
 
-//dd(\Route::getRoutes());
 
 // routes/web.php
 Route::get('/arifurtable', [App\Http\Controllers\ProjectController::class, 'showProjects']);
 
 // for Contractlist page  in office -----------------
 
-// for the edit-contract-page
+
+//use App\Http\Controllers\HeaderAndFooterController;
+
+//Route::resource('header-and-footer', HeaderAndFooterController::class);
+Route::post('/header-and-footer/save', [App\Http\Controllers\HeaderAndFooterController::class, 'save'])->name('header-and-footer.save');
+
+ 
+Route::post('/header-and-footer/{id}', [App\Http\Controllers\HeaderAndFooterController::class, 'deleteContract'])->name('entry.delete');
+ 
+Route::post('/header-and-footer/update/{id}', [App\Http\Controllers\HeaderAndFooterController::class, 'update'])->name('header-and-footer.update');
+
+
+Route::get('/HeaderAndFooter', [App\Http\Controllers\HeaderAndFooterController::class, 'show']);
+
+ 
+//for generate preview pdf 
+
+Route::post('/generate-pdf', [App\Http\Controllers\createContractController::class, 'generatePDF']);
+
+
+// for delete contract list 
+ Route::delete('contracts/{id}', [ App\Http\Controllers\ContractController::class, 'destroy'])->name('contracts.destroy');
+
+//for delete variable list 
+//Route::delete('variables/{id}', [App\Http\Controllers\VariableListController::class, 'destroy'])->name('variables.destroy');
  
 
+
+// for the edit-contract-page
 Route::get('/edit-contract-list/{id}', [App\Http\Controllers\EditContractListController::class, 'edit']);
  
 Route::get('/edit-contract-list', [App\Http\Controllers\EditContractListController::class, 'showvariable']);
@@ -57,6 +81,7 @@ Route::get('/edit-contract-list', [App\Http\Controllers\EditContractListControll
 Route::post('/edit-contract-list/update', [App\Http\Controllers\EditContractListController::class, 'updateContract'])->name('edit-contract-list.update');
 
 
+ 
 
 Route::get('/Contract-List', [App\Http\Controllers\ContractController::class, 'index'])->name('contracts.index');
 
@@ -68,16 +93,32 @@ Route::get('/products', [App\Http\Controllers\ProductController::class, 'product
 
 
 Route::post('/save-product', [App\Http\Controllers\ProductController::class, 'saveProduct']);
+
+
+
+
 //Variable-List page  to show all variable
 Route::get('/Variable-List', [ App\Http\Controllers\VariableListController::class, 'index'])->name('variable.index');
+
+// for delete variable list row
+ 
+Route::post('/delete-contract/{id}', [App\Http\Controllers\VariableListController::class, 'deleteContract'])->name('contract.delete');
+
+Route::post('/product-contract/{id}', [App\Http\Controllers\ProductController::class, 'deleteproduct'])->name('product.delete');
+
 Route::post('/save-variable', [App\Http\Controllers\VariableListController::class, 'saveVariable']);
 //Route::post('/save-variable', [App\Http\Controllers\VariableListController::class, 'saveProduct']);
 Route::get('/fetch-variables', [App\Http\Controllers\VariableListController::class, 'fetchVariables']);
 
 //to pass variables to createcontract.blade.php
-Route::get('/createcontract', [App\Http\Controllers\createcontractController::class, 'show'])->name('createcontract.show');
+Route::get('/createcontract', [App\Http\Controllers\createContractController::class, 'show'])->name('createcontract.show');
+
+ //header footer entries
+
+
 Route::get('/createvariablecontract', [App\Http\Controllers\ContractController::class, 'show']);
-Route::get('/products', [App\Http\Controllers\createcontractController::class, 'productforcreatepage'])->name('createcontract.productforcreatepage');
+
+Route::get('/products', [App\Http\Controllers\createContractController::class, 'productforcreatepage'])->name('createcontract.productforcreatepage');
 
 // web.php
 //Route::get('/createcontract', function () { return view('createcontract');})->name('createcontract');
@@ -86,8 +127,14 @@ Route::get('/products', [App\Http\Controllers\createcontractController::class, '
 //Route::get('/createcontract', [App\Http\Controllers\createcontractController::class, 'index'])->name('createcontract.index');
  
 Route::post('/createcontract', [App\Http\Controllers\CreateContractController::class, 'store'])->name('createcontract.store');
- 
+
+//main one for save contract
 Route::post('/savecontract', [App\Http\Controllers\ContractController::class, 'savecontract']);
+
+//for image 
+Route::post('/upload', [App\Http\Controllers\ContractController::class, 'upload'])->name('ckeditor.upload');
+
+
 
 // edit purposes 
 
@@ -95,11 +142,14 @@ Route::post('/savecontract', [App\Http\Controllers\ContractController::class, 's
 Route::get('/contracts/{id}/history', [App\Http\Controllers\ContractController::class, 'history'])->name('contracts.history');
 
 // Delete Contract
-Route::delete('/contracts/{id}', [App\Http\Controllers\ContractController::class, 'destroy'])->name('contracts.destroy');
+//Route::delete('/contracts/{id}', [App\Http\Controllers\ContractController::class, 'destroy'])->name('contracts.destroy');
 
  
  
 Route::post('/save', [App\Http\Controllers\createcontractController::class, 'save']);
+
+ 
+
 
 Route::post('/updatecontract', [App\Http\Controllers\ContractController::class, 'updatecontract']);
  

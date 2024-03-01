@@ -15,6 +15,7 @@ class VerifyCsrfToken extends Middleware
         '/createcontract',
         '/Contract-List',
         '/Edit-ContractList',
+        '/header-and-footer',
 
     ];
 }

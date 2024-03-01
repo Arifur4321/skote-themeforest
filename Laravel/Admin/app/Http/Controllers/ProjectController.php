@@ -54,7 +54,6 @@ class ProjectController extends Controller
     public function showProjects()
     {
         
-        
         //$projects=Project::all();
        // $projects = DB::table('projects')->get();
        

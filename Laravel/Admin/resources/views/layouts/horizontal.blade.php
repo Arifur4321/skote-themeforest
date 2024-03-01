@@ -411,11 +411,11 @@
                 <ul class="navbar-nav">
 
                     <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle arrow-none" href="#" id="topnav-dashboard" role="button">
+                        <!-- <a class="nav-link dropdown-toggle arrow-none" href="#" id="topnav-dashboard" role="button">
                             <i class="bx bx-home-circle me-2"></i><span key="t-dashboards">@lang('translation.Dashboards')</span>
                             <div class="arrow-down"></div>
-                        </a>
-                        <div class="dropdown-menu" aria-labelledby="topnav-dashboard">
+                        </a> -->
+                        <!-- <div class="dropdown-menu" aria-labelledby="topnav-dashboard">
 
                             <a href="index" class="dropdown-item" key="t-default">@lang('translation.Default')</a>
                             <a href="dashboard-saas" class="dropdown-item" key="t-saas">@lang('translation.Saas')</a>
@@ -546,7 +546,7 @@
                                     <a href="crypto-kyc-application" class="dropdown-item" key="t-kyc">@lang('translation.KYC_Application')</a>
                                     <a href="crypto-ico-landing" class="dropdown-item" key="t-ico">@lang('translation.ICO_Landing')</a>
                                 </div>
-                            </div>
+                            </div> -->
 
                             <div class="dropdown">
                                 <a class="dropdown-item dropdown-toggle arrow-none" href="#" id="topnav-project" role="button">
@@ -554,9 +554,9 @@
                                     <div class="arrow-down"></div>
                                 </a>
                                 <div class="dropdown-menu" aria-labelledby="topnav-project">
-                                    <a href="projects-grid" class="dropdown-item" key="t-p-grid">@lang('translation.Projects_Grid')</a>
+                                    <!-- <a href="projects-grid" class="dropdown-item" key="t-p-grid">@lang('translation.Projects_Grid')</a>
                                     <a href="projects-list" class="dropdown-item" key="t-p-list">@lang('translation.Projects_List')</a>
-                                    <a href="arifurtable"  class="dropdown-item" key="arifurtable-list">@lang('translation.arifurtable')</a> 
+                                    <a href="arifurtable"  class="dropdown-item" key="arifurtable-list">@lang('translation.arifurtable')</a>  -->
                                     
                                     <a href="createcontract"  class="dropdown-item" key="createcontract-list">@lang('translation.createcontract')</a>
                                     
@@ -565,8 +565,9 @@
 
                                     <a href="Product-List"  class="dropdown-item" key="Product-List">@lang('translation.Product-List')</a>
                                     <a href="Variable-List"  class="dropdown-item" key="Variable-List">@lang('translation.Variable-List')</a>
-                                    <a href="projects-overview" class="dropdown-item" key="t-p-overview">@lang('translation.Project_Overview')</a>
-                                    <a href="projects-create" class="dropdown-item" key="t-create-new">@lang('translation.Create_New')</a>
+                                    <a href="HeaderAndFooter"  class="dropdown-item" key="HeaderAndFooter">@lang('translation.HeaderAndFooter')</a>
+                                    <!-- <a href="projects-overview" class="dropdown-item" key="t-p-overview">@lang('translation.Project_Overview')</a>
+                                    <a href="projects-create" class="dropdown-item" key="t-create-new">@lang('translation.Create_New')</a> -->
                                 </div>
                             </div>
                             <div class="dropdown">

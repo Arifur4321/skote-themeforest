@@ -20,9 +20,9 @@ class CreateContractsTable extends Migration
                 $table->unsignedBigInteger('product_id')->nullable();
                 //$table->foreign('product_id')->references('id')->on('products');
                 $table->foreign('product_id')->references('id')->on('products')->name('contracts_product_id_foreign');
-                $table->text('editor_content')->nullable();
+                $table->longText('editor_content')->nullable();
                 $table->text('logged_in_user_name')->nullable();
-                
+                $table->string('image_url')->nullable();
                 $table->timestamps();
             });
         }

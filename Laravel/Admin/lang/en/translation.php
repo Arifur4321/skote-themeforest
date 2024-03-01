@@ -64,6 +64,7 @@ return [
   "Contract-List" => "Contract-List",
   "Edit-Contract-List" => "Edit-Contract-List",
   "Product-List" => " Product-List",
+  "HeaderAndFooter" => "HeaderAndFooter",
   "Variable-List" => " Variable-List",
   "Project_Overview" => "Project Overview",
   "Create_New" => "Create New",

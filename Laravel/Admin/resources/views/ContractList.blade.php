@@ -117,12 +117,32 @@
                         <a href="#" class="dropdown-item">
                             <i class="mdi mdi-history font-size-16 text-info me-1"></i> History
                         </a>
-                        <!-- Delete action -->
-                        <form action="" method="POST">
-                            <button type="submit" class="dropdown-item remove-list">
-                                <i class="mdi mdi-trash-can font-size-16 text-danger me-1"></i> Delete
-                            </button>
+                        <!-- Delete action form -->
+                        <form id="delete-form-{{ $contract->id }}" action="{{ route('contracts.destroy', $contract->id) }}" method="POST" style="display: none;">
+                            @csrf
+                            @method('DELETE')
                         </form>
+
+                        <!-- Delete link with confirmation -->
+                        <a href="#" class="dropdown-item edit-list" onclick="confirmDelete('{{ $contract->id }}');">
+                            <i class="mdi mdi-delete font-size-16 text-danger me-1"></i> Delete
+                        </a>
+
+                        <!-- JavaScript for confirmation popup -->
+                        <script>
+                            function confirmDelete(contractId) {
+                                // Display confirmation popup
+                                if (confirm('Are you sure you want to delete this contract?')) {
+                                    // If user clicks 'Yes', submit the form
+                                    document.getElementById('delete-form-' + contractId).submit();
+                                } else {
+                                    // If user clicks 'No', do nothing
+                                    return false;
+                                }
+                            }
+                        </script>
+
+
                     </div>
                 </div>
             </td>

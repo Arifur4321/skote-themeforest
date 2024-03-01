@@ -19,6 +19,7 @@ class Contract extends Model
         'product_id',
         'editor_content',
         'logged_in_user_name',
+        'image_url', // Add this line for the new column
     ];
 
     /**
