@@ -23,7 +23,6 @@ class ProjectController extends Controller
 
         // Save the project data
         Project::create($request->all());
-
         // Return a JSON response indicating success
         return response()->json(['message' => 'Project saved successfully'], 200);
     }
@@ -48,8 +47,6 @@ class ProjectController extends Controller
         // Return a JSON response indicating success
         return response()->json(['message' => 'Project updated successfully'], 200);
     }
-
-
  
     public function showProjects()
     {
@@ -99,16 +96,15 @@ class ProjectController extends Controller
         return response()->json(['message' => 'Project updated successfully'], 200);
     }
 
-
     public function deleteProject($id)
-{
-    // Find the project by ID and delete it
-        $project = Project::find($id);
-   
-        $project->delete();
-        return response()->json(['message' => 'deleted successfully'], 200);
-  
-}
+    {
+        // Find the project by ID and delete it
+            $project = Project::find($id);
+    
+            $project->delete();
+            return response()->json(['message' => 'deleted successfully'], 200);
+    
+    }
 
  
 }

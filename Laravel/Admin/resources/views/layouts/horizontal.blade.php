@@ -558,13 +558,16 @@
                                     <a href="projects-list" class="dropdown-item" key="t-p-list">@lang('translation.Projects_List')</a>
                                     <a href="arifurtable"  class="dropdown-item" key="arifurtable-list">@lang('translation.arifurtable')</a>  -->
                                     
-                                    <a href="createcontract"  class="dropdown-item" key="createcontract-list">@lang('translation.createcontract')</a>
+                                    <!-- <a href="createcontract"  class="dropdown-item" key="createcontract-list">@lang('translation.createcontract')</a> -->
                                     
                                     <a href="Contract-List"  class="dropdown-item" key="Contract-List">@lang('translation.Contract-List')</a>
                                     <a href="Edit-Contract-List"  class="dropdown-item" key="Edit-Contract-List">@lang('translation.Edit-Contract-List')</a>
 
                                     <a href="Product-List"  class="dropdown-item" key="Product-List">@lang('translation.Product-List')</a>
                                     <a href="Variable-List"  class="dropdown-item" key="Variable-List">@lang('translation.Variable-List')</a>
+                                    <a href="Price-List"  class="dropdown-item" key="Price-List">@lang('translation.Price-List')</a>
+                                    <a href="Add-New-Price"  class="dropdown-item" key="Add-New-Price">@lang('translation.Add-New-Price')</a>
+                                    
                                     <a href="HeaderAndFooter"  class="dropdown-item" key="HeaderAndFooter">@lang('translation.HeaderAndFooter')</a>
                                     <!-- <a href="projects-overview" class="dropdown-item" key="t-p-overview">@lang('translation.Project_Overview')</a>
                                     <a href="projects-create" class="dropdown-item" key="t-create-new">@lang('translation.Create_New')</a> -->

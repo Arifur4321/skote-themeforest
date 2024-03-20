@@ -5,10 +5,44 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 
 use App\Models\VariableList;
- 
+use App\Models\contractvariablecheckbox; 
 
 class VariableListController extends Controller
 {
+    //to check how many time variable is checked
+
+    public function countVariableIDs(Request $request)
+    {
+        // Get the VariableID from the request
+        $variableID = $request->input('VariableID');
+
+        // Count the total number of occurrences of the VariableID in the table
+        $count = ContractVariableCheckbox::where('VariableID', $variableID)->count();
+
+        // Count the number of different ContractIDs related to the VariableID in the table
+        $countContract = ContractVariableCheckbox::where('VariableID', $variableID)
+                                                ->distinct('ContractID')
+                                                ->count('ContractID');
+
+        // Return both counts as JSON response
+        return response()->json([
+            'count' => $count,
+            'countContract' => $countContract
+        ]);
+    }
+
+    // public function countVariableIDs(Request $request)
+    // {
+    //     // Get the VariableID from the request
+    //     $variableID = $request->input('VariableID');
+
+    //     // Count the number of occurrences of the VariableID in the table
+    //     $count = ContractVariableCheckbox::where('VariableID', $variableID)->count();
+
+    //     // Return the count as JSON response
+    //     return response()->json(['count' => $count]);
+    // }
+
     //to view all page
     public function index()
     {
@@ -93,7 +127,7 @@ class VariableListController extends Controller
     }
 
 
-    // to shoe data in variable button modal table
+    // to show data in variable button modal table
     
     public function fetchVariables()
     {

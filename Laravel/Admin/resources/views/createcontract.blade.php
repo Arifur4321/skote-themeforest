@@ -106,8 +106,9 @@
 
  
 
-  <!-- Header Or Footer modal -->
-<div class="modal" id="HeaderOrFooterModal" tabindex="-1" aria-labelledby="HeaderOrFooterModalLabel" aria-hidden="true" data-bs-backdrop="static">
+  <!-- Header Or Footer modal working one  with below script-->
+ <!--
+    <div class="modal" id="HeaderOrFooterModal" tabindex="-1" aria-labelledby="HeaderOrFooterModalLabel" aria-hidden="true" data-bs-backdrop="static">
     <div class="modal-dialog modal-dialog-centered modal-lg">
         <div class="modal-content">
             <div class="modal-header">
@@ -115,37 +116,42 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <div class="mb-3"> <!-- Add margin bottom to create space -->
+              <div class="mb-3">  
                     <input type="checkbox" id="checkbox1" onchange="toggleDropdown('dropdown1')"> Header
                     <select id="dropdown1" class="form-select" style="display: none;">
                         @foreach($headerEntries as $id => $header)
                             <option value="{{ $id }}">{{ $header }}</option>
                         @endforeach
+                    
                     </select>
                 </div>
-                <div class="mb-3"> <!-- Add margin bottom to create space -->
+         
+                <div class="mb-3"> 
                     <input type="checkbox" id="checkbox2" onchange="toggleDropdown('dropdown2')"> Footer
                     <select id="dropdown2" class="form-select" style="display: none;">
                         @foreach($footerEntries as $id => $footer)
                             <option value="{{ $id }}">{{ $footer }}</option>
                         @endforeach
+                
                     </select>
                 </div>
             </div>
+
             <div class="modal-footer">
-                <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Close</button>
-                <!-- Add your save button or any other buttons here if needed -->
+                <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Close </button>
+               
             </div>
+
         </div>
     </div>
-</div>
-
+</div> 
+ 
 <script>
     function openHeaderOrFooterModal() {
         var myModal = new bootstrap.Modal(document.getElementById('HeaderOrFooterModal'));
         myModal.show();
     }
-
+    
     function toggleDropdown(dropdownId) {
         var dropdown = document.getElementById(dropdownId);
         var checkboxId = dropdownId.replace('dropdown', 'checkbox');
@@ -158,11 +164,87 @@
             dropdown.disabled = true;
         }
     }   
-</script>
+</script>   -->
+
+ 
+    <!-- Header Or Footer modal working one  with below script-->
+    <div class="modal" id="HeaderOrFooterModal" tabindex="-1" aria-labelledby="HeaderOrFooterModalLabel" aria-hidden="true" data-bs-backdrop="static">
+        <div class="modal-dialog modal-dialog-centered modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="HeaderOrFooterModalLabel">Header/Footer Entries</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="mb-3">
+                        <input type="checkbox" id="checkbox1" onchange="toggleDropdowns('checkbox1', 'dropdown1', 'dropdown2')"> Header
+                        <div class="row">
+                            <div class="col">
+                                <select id="dropdown1" class="form-select" style="display: none;">
+                                    @foreach($headerEntries as $id => $header)
+                                        <option value="{{ $id }}">{{ $header }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                            <div class="col">
+                                <select id="dropdown2" class="form-select" style="display: none;">
+                                    <option value="first">First Page</option>
+                                    <option value="every">Every Page</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        <input type="checkbox" id="checkbox2" onchange="toggleDropdowns('checkbox2', 'dropdown3', 'dropdown4')"> Footer
+                        <div class="row">
+                            <div class="col">
+                                <select id="dropdown3" class="form-select" style="display: none;">
+                                    @foreach($footerEntries as $id => $footer)
+                                        <option value="{{ $id }}">{{ $footer }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                            <div class="col">
+                                <select id="dropdown4" class="form-select" style="display: none;">
+                                    <option value="first">First Page</option>
+                                    <option value="every">Every Page</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Save</button>
+                    <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function openHeaderOrFooterModal() {
+            var myModal = new bootstrap.Modal(document.getElementById('HeaderOrFooterModal'));
+            myModal.show();
+        }
+
+        function toggleDropdowns(checkboxId, dropdownId1, dropdownId2) {
+            var checkbox = document.getElementById(checkboxId);
+            var dropdown1 = document.getElementById(dropdownId1);
+            var dropdown2 = document.getElementById(dropdownId2);
+
+            if (checkbox.checked) {
+                dropdown1.style.display = 'block';
+                dropdown2.style.display = 'block';
+            } else {
+                dropdown1.style.display = 'none';
+                dropdown2.style.display = 'none';
+            }
+        }
+    </script>
 
 
 
-    
+
     <!-- Product Modal -->
     <div class="modal" id="exampleModalProduct" tabindex="-1" aria-labelledby="exampleModalLabelNew" aria-hidden="true" data-bs-backdrop="static">
         <div class="modal-dialog modal-dialog-centered modal-lg">
@@ -302,51 +384,49 @@
 <div class="card">
     <div class="card-body">
         <form id="contractForm" action="/createcontract" method="POST">
-         
-        <div class="d-flex align-items-center mb-3">
-            <label for="title" class="form-label me-2" style="width: 120px;">Contract Name</label>
-            <input type="text" class="form-control w-75" id="title" name="title">
-            
-            <div class="ms-2 d-flex">
-
-                <!-- open pdf previews button -->
-               
-           
-                <!-- <button type="button" id="preview-button" class="btn btn-primary me-2 btn-lg" 
-                onclick="previewPDF()">Preview</button> -->
-
-                <button type="button" onclick="previewPDF()" id="preview-button" 
-                class="btn btn-primary me-2 btn-lg">Preview</button> 
- 
-                <button type="button" id="HeaderOrFooter" class="btn btn-primary me-2 btn-lg" 
-                onclick="openHeaderOrFooterModal()">Header/Footer</button>
-               
-                <button type="button" class="btn btn-primary me-2 btn-lg" onclick="openproductmodal()">Product</button>
-                <!-- open modal to show all table 
-
-                <button type="button" class="btn btn-primary me-2 btn-lg" onclick="saveData('variable')">Variable</button> -->
-
-                <button type="button" class="btn btn-primary me-2 btn-lg"  onclick="openModalNew()">Variable</button>
+     
+            <div class="d-flex align-items-center mb-3 fixed-buttons">
+                <label for="title" class="form-label me-2" style="width: 120px;">Contract Name</label>
+                <input type="text" class="form-control w-75" id="title" name="title">
                 
-                <!-- Button to insert dummy  text 
-                <button id="insertTextBtn"  >Insert Text</button> -->    
-          
-                <!-- Include the CKEditor library -->
-            </div>
-            
-            <div class="ms-2">
-                <button type="button" id="savebutton" class="btn btn-primary me-2 btn-lg" 
-                onclick="saveData('save')">Save</button>
-            </div>
-        </div>
-       
-            
-           
+                <div class="ms-2 d-flex"  >
 
+                    <!-- open pdf previews button -->
+                
+            
+                    <!-- <button type="button" id="preview-button" class="btn btn-primary me-2 btn-lg" 
+                    onclick="previewPDF()">Preview</button> -->
+
+                    <button type="button" onclick="previewPDF()" id="preview-button" 
+                    class="btn btn-primary me-2 btn-lg">Preview</button> 
+    
+                    <button type="button" id="HeaderOrFooter" class="btn btn-primary me-2 btn-lg" 
+                    onclick="openHeaderOrFooterModal()">Header/Footer</button>
+                
+                    <button type="button" class="btn btn-primary me-2 btn-lg" onclick="openproductmodal()">Product</button>
+                    <!-- open modal to show all table 
+
+                    <button type="button" class="btn btn-primary me-2 btn-lg" onclick="saveData('variable')">Variable</button> -->
+
+                    <button type="button" class="btn btn-primary me-2 btn-lg"  onclick="openModalNew()">Variable</button>
+                    
+                    <button type="button" id="signbutton" class="btn btn-primary me-2 btn-lg" >  Signature </button>
+                    <!-- Button to insert dummy  text 
+                    <button id="insertTextBtn"  >Insert Text</button> -->    
+            
+                    <!-- Include the CKEditor library -->
+                </div>
+                
+                <div class="ms-2">
+                    <button type="button" id="savebutton" class="btn btn-primary me-2 btn-lg" 
+                    onclick="saveData('save')">Save</button>
+                </div>
+        
+            </div>
+  
             <!-- arifur CSKEdiotr  -->
              <textarea id="editor" name="editor" style="width: 100%; max-width: 500px;"></textarea>
-
-             
+                   
             <!--  for licenced ckeditor 
                 <div id="presence-list-container"></div>
 
@@ -380,6 +460,13 @@
                 .ck-editor__editable {
                     min-height: 500px;
                 }
+
+                .fixed-buttons {
+                    position: sticky;
+                    top: 0;
+                }
+
+              
 
             </style>
         </form>
@@ -470,27 +557,122 @@ function fetchVariables() {
                 console.error(error);
             });
 
+            //   $(document).ready(function() {
+            //     $('#signbutton').click(function() {
+            //         const imageUrl = 'public/signature/firma.jpg';
+            //         const img = "<img src='" + imageUrl + "'/>";
+            //         //config.allowedContent = 'img[src,alt,width,height]'; editor.data.set
+                    
+            //         const currentPosition = editor.model.document.selection.getLastPosition();
+            //         if (currentPosition) {
+            //            // editor.model.change(writer => {
+            //                 editor.data.set(img, currentPosition);
+            //            // });
 
-            // pdf generator test
-            function previewPDF() {
-            // Get data from CKEditor
-            var editorData = editor.getData();
+            //         }
+            //     });
+            // });
 
-            // Convert HTML content to PDF using jQuery
-            var myWindow = window.open('', 'PRINT', 'height=600,width=800');
+            $(document).ready(function() {
+                $('#signbutton').click(function() {
+                    const imageUrl = 'firma.jpg';
+                   // const img = "<img src='" + imageUrl + "'/>";
+                  //  const img = "<img src='https://www.redballoontoystore.com/cdn/shop/products/Playground-Ball-OutdoorActive-Schylling_460x@2x.jpg?v=1651770584'/>";
+                  const img = "<img src='https://i.ibb.co/71g553C/FIRMA-QUI.jpg'/>";
+                    const previousContent = editor.getData();
+                    const currentPosition = editor.model.document.selection.getLastPosition();
+                    
+                    if (currentPosition) {
+                        const newData = previousContent + img;
+                        editor.data.set(newData, { position: currentPosition });
+                    }
+                });
+            });
 
-            myWindow.document.write('<html><head><title>PDF Preview</title>');
-            myWindow.document.write('</head><body>');
-            myWindow.document.write(editorData);
-            myWindow.document.write('</body></html>');
 
-            myWindow.document.close(); // necessary for IE >= 10
-            myWindow.onload = function () {
-                myWindow.print();
-                myWindow.close();
-            };
+
+ 
+    function previewPDF() {
+    // Get data from CKEditor
+    var editorData = editor.getData();
+
+    // Get selected header or footer data
+    var headerDropdown = document.getElementById('dropdown1');
+    var footerDropdown = document.getElementById('dropdown3');
+    var headerValue = headerDropdown.options[headerDropdown.selectedIndex].text;
+    var footerValue = footerDropdown.options[footerDropdown.selectedIndex].text;
+
+    // Determine if header or footer is selected for first or every page
+    var headerLocation = document.getElementById('dropdown2').value;
+    var footerLocation = document.getElementById('dropdown4').value;
+
+    // Check if header checkbox is checked
+    var headerCheckbox = document.getElementById('checkbox1').checked;
+
+    // Check if footer checkbox is checked
+    var footerCheckbox = document.getElementById('checkbox2').checked;
+
+    // Construct title text including selected header or footer values
+    var titleHeader = "";
+    var titleFooter = "";
+
+    // Construct header and footer based on selection
+    var headerHTML = '';
+    var footerHTML = '';
+
+    // Include header if checkbox is checked and it's selected for the first page or every page
+    if (headerCheckbox) {
+        if (headerLocation === 'first' || headerLocation === 'every') {
+            titleHeader += headerValue  ;
+            headerHTML = '<div style="position: fixed; top: 40px; right: 10px;">' + headerValue + '</div>';
         }
-                
+    }
+
+    // Include footer if checkbox is checked and it's selected for the first page or every page
+    if (footerCheckbox) {
+        if (footerLocation === 'first' || footerLocation === 'every') {
+            titleFooter += footerValue + " - " + footerLocation;
+            footerHTML = '<div style="position: fixed; bottom: 5px; right: 20px;">' + footerValue +  '</div>';
+        }
+    }
+
+    // Convert HTML content to PDF using jQuery
+    var myWindow = window.open('', 'PRINT', 'height=600,width=800');
+
+    myWindow.document.write('<html><title style="text-align:right">' + 
+ "Codice 1% PDF &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"+  titleHeader +'</title>');
+    myWindow.document.write('<style>@page { margin: 100px; counter-reset: page-counter; }</style>'); // Reset page counter
+    myWindow.document.write('</head><body>');
+
+    // Increment page counter for each page
+    myWindow.document.write('<div style="position: absolute; top: -50px; right: 50px;">Page: <span style="counter-increment: page-counter; content: counter(page-counter);"></span></div>');
+
+    // Write editor data
+    myWindow.document.write(editorData);
+
+    // Include footer based on selection
+    myWindow.document.write('</body><footer>' + footerHTML + '</footer></html>');
+
+    myWindow.document.close(); // necessary for IE >= 10
+    myWindow.onload = function () {
+        myWindow.print();
+        myWindow.close();
+    };
+}
+
+
+// testing previewPDF 
+
+// Include header if checkbox is checked and it's selected for the first page only
+
+
+
+
+
+
+
+// Example usage:
+//previewPDF("Your Title Text Here");
 
     //     let editor; // Global variable for main CKEditor instance        
 
@@ -818,7 +1000,7 @@ function fetchVariables() {
     //             console.error(error);
     //         });
 
-
+         let dataSaved = false;
             
         // Function to save data when Save button is clicked
         function saveData() {
@@ -850,13 +1032,26 @@ function fetchVariables() {
        
 
             saveContent(formData); // Call saveContent function to save data
+            dataSaved = true;
         }
+        
+        window.addEventListener('beforeunload', function (e) {
+            if (!dataSaved) {
+                // Prompt the user if they want to exit without saving
+                e.preventDefault();
+                e.returnValue = ''; // This is for older browsers
+                return 'The data is not saved. Do you want to exit?';
+            }
+        });
+
         function saveContent(formData) {
             $.ajax({
                 url: '/savecontract',
                 type: 'POST',
                 data: formData,
                 success: function(response) {
+                    alert(response.message);
+                    window.location.href = "/Contract-List";
                     console.log(response);
                 },
                 error: function(xhr, status, error) {

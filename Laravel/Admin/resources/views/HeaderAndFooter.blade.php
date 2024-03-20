@@ -14,6 +14,12 @@
     @endcomponent
 
     <meta name="csrf-token" content="{{ csrf_token() }}">
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script> 
+    <link ref="stylesheet" href="//cdn.datatables.net/2.0.2/css/dataTables.dataTables.min.css">   </link>
+    <script src="//cdn.datatables.net/2.0.2/js/dataTables.min.js"  ></script>
+
+
+
      <!--  Arifur change  -->
      <div class="row">
     <div class="col-sm">
@@ -205,6 +211,31 @@
             @endforeach
         </tbody>
     </table>
+
+    
+<!-- For pagination  -->
+<script>
+//    let table = new DataTable('#ContractList');
+$(document).ready(function() {
+        let table = new DataTable('#HeaderAndFooterList');
+
+        let lengthMenu = $('.dt-length');
+        lengthMenu.appendTo($('#HeaderAndFooterList').parent().parent().parent().parent().parent().find('tfoot'));
+
+       // let lengthMenu = $('.dt-length');
+       // lengthMenu.addClass('smaller-length-menu').appendTo($('#ContractList').parent().parent().parent().parent().parent().find('tfoot'));
+
+        // Hide additional search box
+        $('.dt-search').hide();
+        $('.dt-info').addClass('right-info');
+
+
+        // Bind DataTable search to custom search box
+        $('#searchInput').on('keyup', function() {
+            table.search($(this).val()).draw();
+        });
+    });
+ </script>
 
  
 

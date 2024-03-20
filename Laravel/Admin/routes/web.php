@@ -25,9 +25,6 @@ Route::get('/customers', [App\Http\Controllers\CustomerController::class, 'index
 Route::post('/update-profile/{id}', [App\Http\Controllers\HomeController::class, 'updateProfile'])->name('updateProfile');
 Route::post('/update-password/{id}', [App\Http\Controllers\HomeController::class, 'updatePassword'])->name('updatePassword');
 
-
-
- 
 //Language Translation
 Route::get('index/{locale}', [App\Http\Controllers\HomeController::class, 'lang']);
 
@@ -45,6 +42,31 @@ Route::get('/arifurtable', [App\Http\Controllers\ProjectController::class, 'show
 
 // for Contractlist page  in office -----------------
 
+// route for PriceList 
+
+Route::delete('/price-lists/{id}', [App\Http\Controllers\PriceListController::class,'destroy'])->name('price-lists.destroy');
+
+Route::get('/edit-price/{id}', [App\Http\Controllers\PriceListController::class, 'editPrice'])->name('edit.price');
+
+Route::post('/update-price/{id}', [App\Http\Controllers\PriceListController::class, 'updatePrice'])->name('update.price');
+
+Route::get('/Price-List', [App\Http\Controllers\PriceListController::class, 'getpricedata'])->name('get.data');
+
+Route::post('/save-price-list', [App\Http\Controllers\PriceListController::class, 'savePriceList'])->name('save.price.list');
+ 
+//land on new update page when create new contract
+Route::get('/createcontractwithupdatepage', [App\Http\Controllers\ContractController::class, 'createContractWithUpdatePage'])->name('createcontractwithupdatepage');
+
+//to see checked variable from database
+Route::post('/checkedVariable', [App\Http\Controllers\EditContractListController::class, 'checkedVariable']);
+
+Route::post('/HowmanyVariable', [App\Http\Controllers\VariableListController::class,'countVariableIDs']);
+
+// to insert into contractvariablecheckbox when variable pop up is checked 
+Route::post('/insert-contract-variable', [App\Http\Controllers\EditContractListController::class, 'insertContractVariable']);
+
+//to delete the row from contractvariablecheckbox when unchecked
+Route::post('/delete-contract-variable', [App\Http\Controllers\EditContractListController::class,'deleteContractVariable']);
 
 //use App\Http\Controllers\HeaderAndFooterController;
 
@@ -71,24 +93,20 @@ Route::post('/generate-pdf', [App\Http\Controllers\createContractController::cla
 //for delete variable list 
 //Route::delete('variables/{id}', [App\Http\Controllers\VariableListController::class, 'destroy'])->name('variables.destroy');
  
-
-
 // for the edit-contract-page
 Route::get('/edit-contract-list/{id}', [App\Http\Controllers\EditContractListController::class, 'edit']);
  
 Route::get('/edit-contract-list', [App\Http\Controllers\EditContractListController::class, 'showvariable']);
  
 Route::post('/edit-contract-list/update', [App\Http\Controllers\EditContractListController::class, 'updateContract'])->name('edit-contract-list.update');
-
-
  
-
 Route::get('/Contract-List', [App\Http\Controllers\ContractController::class, 'index'])->name('contracts.index');
 
 Route::post('/update-variable/{id}', [App\Http\Controllers\VariableListController::class, 'updateVariable']);
  
 // for Product list page  in office 
 Route::get('/Product-List', [App\Http\Controllers\ProductController::class, 'index'])->name('product.index');
+
 Route::get('/products', [App\Http\Controllers\ProductController::class, 'productforcreatepage'])->name('product.index');
 
 

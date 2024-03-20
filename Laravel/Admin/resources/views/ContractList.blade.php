@@ -15,14 +15,18 @@
     @endcomponent
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script> 
+    <link ref="stylesheet" href="//cdn.datatables.net/2.0.2/css/dataTables.dataTables.min.css">   </link>
+    <script src="//cdn.datatables.net/2.0.2/js/dataTables.min.js"  ></script>
+
      <!--  Arifur change  -->
      <div class="row">
             <div class="col-sm">
                 <div class="search-box me-2 d-inline-block">
-                    <div class="position-relative">
+              <div class="position-relative">
                         <input type="text" class="form-control" autocomplete="off" id="searchInput" placeholder="Search...">
                         <i class="bx bx-search-alt search-icon"></i>
-                    </div>
+                    </div>  
                 </div>
             </div>
 
@@ -32,9 +36,24 @@
                 </div>
             </div>
     </div>
+    
+<script>    
+    // function redirectTocreatecontract() {
+    //     // Redirect to the route associated with createcontract.blade.php
+    //     window.location.href = "/createcontract"; // Replace with your actual route path
+    // }
+    function redirectTocreatecontract() {
+        // Redirect to the route associated with createcontract.blade.php
+        window.location.href = "/createcontractwithupdatepage"; // Replace with your actual route path
+    }
+
+    function redirectToEditContract(contractId) {
+    window.location.href = "/edit-contract-list/" + contractId;
+    }
+</script>
 
 <!-- arifur for search -->
-<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+<!-- <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
 <script>
     $(document).ready(function () {
         // Reference to the input field and the table
@@ -51,33 +70,7 @@
             });
         });
     });
-</script>
-
-
-
-
-
-<script>
-    function redirectTocreatecontract() {
-        // Redirect to the route associated with createcontract.blade.php
-        window.location.href = "/createcontract"; // Replace with your actual route path
-    }
-
-    // function redirectToEditcontract(contractId, contractName, editorContent) {
-    // // Redirect to the edit contract page with contract details in the URL
-    // window.location.href = "/edit-contract-list?contractId=" + contractId + "&contractName=" + 
-    // contractName + "&editorContent=" + encodeURIComponent(editorContent);
-    // }
-
-    function redirectToEditContract(contractId) {
-    window.location.href = "/edit-contract-list/" + contractId;
-    }
-
-
-
-</script>
-
-
+</script> -->
 
 
 <!-- Table content -->
@@ -99,8 +92,9 @@
         <tr>
             <td>{{ $contract->id }}</td>
             <td>{{ $contract->contract_name }}</td>
-            <td>{{ $contract->logged_in_user_name }}</td>
-            <td>{{ $contract->created_at }}</td>
+            <!-- <td>{{ $contract->logged_in_user_name }}</td> -->
+            <td>{{ Auth::user()->name }}</td>
+            <td>{{ $contract->created_at}}</td>
             <td>{{ $contract->updated_at }}</td>
             <td>
                 <!-- Dropdown menu for actions -->
@@ -151,31 +145,80 @@
     </tbody>
 </table>
 
+<!-- For pagination  -->
+<script>
+//    let table = new DataTable('#ContractList');
+$(document).ready(function() {
+        let table = new DataTable('#ContractList');
 
- <!-- Add a form for selecting items per page -->
+        let lengthMenu = $('.dt-length');
+        lengthMenu.appendTo($('#ContractList').parent().parent().parent().parent().parent().find('tfoot'));
+
+       // let lengthMenu = $('.dt-length');
+       // lengthMenu.addClass('smaller-length-menu').appendTo($('#ContractList').parent().parent().parent().parent().parent().find('tfoot'));
+
+        // Hide additional search box
+        $('.dt-search').hide();
+        $('.dt-info').addClass('right-info');
+
+
+        // Bind DataTable search to custom search box
+        $('#searchInput').on('keyup', function() {
+            table.search($(this).val()).draw();
+        });
+    });
+ </script>
+
+<!-- 
+<script>
+ $(document).ready(function () {
+    var $searchInput = $('#searchInput');
+    var $table = $('#ContractList');
+    var searchText = ''; // Variable to store search query
+
+    function performSearch() {
+        searchText = $searchInput.val().toLowerCase();
+        $table.find('tbody tr').hide().filter(function () {
+            return $(this).text().toLowerCase().indexOf(searchText) > -1;
+        }).show();
+    }
+
+    $searchInput.on('keyup', function () {
+        performSearch();
+    });
+
+    
+    $table.on('draw.dt', function () {
+        performSearch();  
+    });
+
+});
+
+ 
+</script>
+
+ 
  <form action="{{ route('contracts.index') }}" method="GET" class="mb-3">
     <label for="perPage">Items per page:</label>
     <select name="perPage" id="perPage" onchange="this.form.submit()">
         <option value="5" {{ Request::input('perPage') == 5 ? 'selected' : '' }}>5</option>
         <option value="10" {{ Request::input('perPage') == 10 ? 'selected' : '' }}>10</option>
         <option value="20" {{ Request::input('perPage') == 20 ? 'selected' : '' }}>20</option>
-        <!-- Add more options as needed -->
+    
     </select>
 </form>
-<!-- Pagination links -->
+ 
+ 
 <div class="d-flex justify-content-center">
-    {{ $contracts->appends(request()->input())->links() }}
+ 
 </div>
-
+ -->
 
 <style>
     .w-5{
         display:none;
     }
 </style>
-
-
-
 
  <!-- edit Modal contract list -->
  <div   class="modal fade"  id="exampleModal" tabindex="-1" aria-labelledby="#exampleModalFullscreenLabel" aria-hidden="true" data-bs-backdrop="static">
@@ -212,9 +255,6 @@
     </div>
 </div>
  
- 
- 
- 
 <!-- variable Modal -->
 <!-- product list Modal -->
 <div class="modal" id="exampleModalNew" tabindex="-1" aria-labelledby="exampleModalLabelNew" aria-hidden="true" data-bs-backdrop="static">
@@ -225,7 +265,7 @@
                 <div class="col-sm">
                     <div class="search-box me-2 d-inline-block">
                         <div class="position-relative">
-                            <input type="text" class="form-control" autocomplete="off" id="searchInput" placeholder="Search...">
+                            <input type="text" class="form-control" autocomplete="off" id="" placeholder="Search...">
                             <i class="bx bx-search-alt search-icon"></i>
                         </div>
                     </div>
@@ -240,7 +280,7 @@
                     <meta name="viewport" content="width=device-width, initial-scale=1.0">
                     <!-- Wrap the table inside a div with fixed height and auto scroll -->
                     <div style="max-height: 400px; overflow-y: auto;">
-                        <table id="ContractList" action="/createcontract" method="POST" class="table">
+                        <table id=" " action="/createcontract" method="POST" class="table">
                             <thead>
                                 <tr>
                                     <th>VariableID</th>

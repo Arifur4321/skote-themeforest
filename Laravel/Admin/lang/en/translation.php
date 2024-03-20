@@ -62,6 +62,8 @@ return [
   "arifurtable" => "arifurtable",
   "createcontract" => "createcontract",
   "Contract-List" => "Contract-List",
+  "Price-List" => "Price-List",
+  "Add-New-Price" => "Add-New-Price",
   "Edit-Contract-List" => "Edit-Contract-List",
   "Product-List" => " Product-List",
   "HeaderAndFooter" => "HeaderAndFooter",

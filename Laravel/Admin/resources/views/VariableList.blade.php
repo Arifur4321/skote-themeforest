@@ -15,16 +15,20 @@
 
 
     <meta name="csrf-token" content="{{ csrf_token() }}">
-     <!--  Arifur change  -->
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script> 
+    <link ref="stylesheet" href="//cdn.datatables.net/2.0.2/css/dataTables.dataTables.min.css">   </link>
+    <script src="//cdn.datatables.net/2.0.2/js/dataTables.min.js"  ></script>
+    
+     <!--  Arifur change -->
      <div class="row">
-    <div class="col-sm">
-        <div class="search-box me-2 d-inline-block">
-            <div class="position-relative">
-                <input type="text" class="form-control" autocomplete="off" id="searchInput" placeholder="Search...">
-                <i class="bx bx-search-alt search-icon"></i>
+        <div class="col-sm">
+            <div class="search-box me-2 d-inline-block">
+                <div class="position-relative">
+                    <input type="text" class="form-control" autocomplete="off" id="searchInput" placeholder="Search...">
+                    <i class="bx bx-search-alt search-icon"></i>
+                </div>
             </div>
         </div>
-    </div>
 
     <div class="col-sm-auto">
         <div class="text-sm-end">
@@ -69,7 +73,7 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary" onclick="saveVariable()">Save Product</button>
+                <button type="button" class="btn btn-primary" onclick="saveVariable()">Save Variable</button>
 
             </div>
         </div>
@@ -152,8 +156,7 @@
                     <i class="mdi mdi-pencil font-size-16 text-success me-1"></i> Edit
                 </a>
 
-                
-                <!-- History Button 
+                <!--testing History Button 
                 <li>
                     <a href="" class="dropdown-item">
                         <i class="mdi mdi-history font-size-16 text-info me-1"></i> History
@@ -170,14 +173,34 @@
                     <!-- JavaScript for confirmation popup -->
                     <script>
                         function confirmDelete(contractId) {
-                            // Display confirmation popup
-                            if (confirm('Are you sure you want to delete this contract?')) {
-                                // If user clicks 'Yes', submit the form
-                                document.getElementById('deleteForm-' + contractId).submit();
-                            } else {
-                                // If user clicks 'No', do nothing
-                                return false;
-                            }
+
+
+                            $.ajax({
+                                url: '/HowmanyVariable',
+                                method: 'POST',
+                                data: {
+                                    _token: "{{ csrf_token() }}",
+                                    VariableID: contractId
+                                },
+                                success: function(response) {
+                                     
+                                    var count = response.count;
+                                    var countContract= response.countContract;
+                                    console.log("Number of variable IDs: " + count);
+                                      // Display confirmation popup
+                                    if (confirm('This Variable is '+ count +' times checked So Are you sure you want to delete this Variable?')) {
+                                        // If user clicks 'Yes', submit the form
+                                        document.getElementById('deleteForm-' + contractId).submit();
+                                    } else {
+                                        // If user clicks 'No', do nothing
+                                        return false;
+                                    }
+                                },
+                                error: function(xhr, status, error) {
+                                    // Handle error
+                                }
+                            });
+
                         }
                     </script>
                 </form>
@@ -194,6 +217,30 @@
 </table>
  
 
+
+<!-- For pagination  -->
+<script>
+//    let table = new DataTable('#ContractList');
+$(document).ready(function() {
+        let table = new DataTable('#ContractList');
+
+        let lengthMenu = $('.dt-length');
+        lengthMenu.appendTo($('#ContractList').parent().parent().parent().parent().parent().find('tfoot'));
+
+       // let lengthMenu = $('.dt-length');
+       // lengthMenu.addClass('smaller-length-menu').appendTo($('#ContractList').parent().parent().parent().parent().parent().find('tfoot'));
+
+        // Hide additional search box
+        $('.dt-search').hide();
+        $('.dt-info').addClass('right-info');
+
+
+        // Bind DataTable search to custom search box
+        $('#searchInput').on('keyup', function() {
+            table.search($(this).val()).draw();
+        });
+    });
+ </script>
  
 <!-- edit Modal -->
 <div class="modal" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">

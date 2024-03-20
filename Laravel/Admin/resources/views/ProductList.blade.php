@@ -13,8 +13,13 @@
         @endslot
     @endcomponent
     <meta name="csrf-token" content="{{ csrf_token() }}">
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script> 
+    <link ref="stylesheet" href="//cdn.datatables.net/2.0.2/css/dataTables.dataTables.min.css">   </link>
+    <script src="//cdn.datatables.net/2.0.2/js/dataTables.min.js"  ></script>
+
+
      <!--  Arifur change  -->
-     <div class="row">
+     <div class="row"  id="firstid">
     <div class="col-sm">
         <div class="search-box me-2 d-inline-block">
             <div class="position-relative">
@@ -101,7 +106,6 @@ function saveProduct() {
     // Get form data
     var productName = $('#product-name-new').val();
     var description = $('#description-new').val();
- 
 
     // Basic validation
     if (!productName || !description   ) {
@@ -117,11 +121,8 @@ function saveProduct() {
         url: '/save-product',
         type: 'POST',
         data: {
- 
             productName: productName,
             description: description,
-     
-         
         },
         headers: {
             'X-CSRF-TOKEN': csrfToken
@@ -375,6 +376,31 @@ function saveProduct() {
     }
 </style>
 
+
+
+<!-- For pagination  -->
+<script>
+//    let table = new DataTable('#ContractList');
+$(document).ready(function() {
+        let table = new DataTable('#ContractList');
+
+        let lengthMenu = $('.dt-length');
+        lengthMenu.appendTo($('#ContractList').parent().parent().parent().parent().parent().find('tfoot'));
+
+       // let lengthMenu = $('.dt-length');
+       // lengthMenu.addClass('smaller-length-menu').appendTo($('#ContractList').parent().parent().parent().parent().parent().find('tfoot'));
+
+        // Hide additional search box
+        $('.dt-search').hide();
+        $('.dt-info').addClass('right-info');
+
+
+        // Bind DataTable search to custom search box
+        $('#searchInput').on('keyup', function() {
+            table.search($(this).val()).draw();
+        });
+    });
+ </script>
 
 @section('script')
     <!-- CKEditor script -->

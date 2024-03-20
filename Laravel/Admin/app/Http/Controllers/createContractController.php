@@ -15,7 +15,20 @@ use Dompdf\Options;
 
 class createcontractController extends Controller
 {    
-    
+
+      
+    public function show()
+    {
+        $headerEntries = HeaderAndFooter::where('type', 'Header')->pluck('name', 'id')->toArray();
+        $footerEntries = HeaderAndFooter::where('type', 'Footer')->pluck('name', 'id')->toArray();
+        
+        $variables = VariableList::all();
+        $products = Product::all(); 
+        return view('createcontract', compact('variables','products','headerEntries','footerEntries'));
+    }
+
+
+    // testing method
     public function HeaderOrFooter()
     {
         $headerEntries = HeaderAndFooter::where('type', 'Header')->pluck('name', 'id')->toArray();
@@ -73,16 +86,6 @@ class createcontractController extends Controller
     {
         $products = Product::all(); // Retrieve all products from the database to pass to createcontract
         return view('createcontract', compact('products'));
-    }
-    
-    public function show()
-    {
-        $headerEntries = HeaderAndFooter::where('type', 'Header')->pluck('name', 'id')->toArray();
-        $footerEntries = HeaderAndFooter::where('type', 'Footer')->pluck('name', 'id')->toArray();
-        
-        $variables = VariableList::all();
-        $products = Product::all(); 
-        return view('createcontract', compact('variables','products','headerEntries','footerEntries'));
     }
 
    

@@ -22,3 +22,6 @@ class CreateHeaderAndFooterTable extends Migration
         Schema::dropIfExists('header_and_footer');
     }
 }
+
+ 
+
