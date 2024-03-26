@@ -16,6 +16,7 @@
 
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
+ 
 
  <script>
 
@@ -109,23 +110,45 @@ window.onbeforeunload = function() {
                     <div class="d-flex align-items-center mb-3">
                         <label for="title" class="form-label me-2" style="width: 120px;">Contract Name</label>
                         <input type="text" class="form-control w-75" id="title" name="contract_name" value="{{ $contract->contract_name }}">
-                        
-                        <!-- Preview  Button -->
+                       
+                        <!-- Preview  Button 
                         <button type="button" onclick="previewPDF()" id="preview-button" 
                          class="btn btn-primary me-2 btn-lg">Preview</button> 
-                           <!-- header/Footer adding  Button --> 
+             
                          <button type="button" id="HeaderOrFooter" class="btn btn-primary me-2 btn-lg" 
                          onclick="openHeaderOrFooterModal()">Header/Footer</button>
+
+                
+                        <button type="button" class="btn btn-primary me-2 btn-lg" onclick="openpricemodal('{{$contract->id}}' )" > AddPrice</button>
                
-                        <!-- Product Button -->
+                  
                         <button type="button" class="btn btn-primary me-2 btn-lg" onclick="openproductmodal()" >Product</button>
                         
-                        <!-- Variable Button -->
+                   
                         <button type="button" class="btn btn-primary me-2 btn-lg" onclick="openModalNew('{{$contract->id}}' )">Variable</button>
-                         <!-- Signature Button -->
+                    
                         <button type="button" id="signbutton" class="btn btn-primary me-2 btn-lg" >  Signature </button>
-                        <!-- Save Button -->
+                     
                         <button type="button" class="btn btn-success me-2 btn-lg" onclick="saveData()">Update</button>
+                        -->
+                       <!-- All button dropdown together in Action  -->
+                       
+                        <div class="dropdown" style="margin-left: 3px;">
+                            <button type="button" class="btn btn-primary dropdown-toggle btn-lg" data-bs-toggle="dropdown" aria-expanded="false">
+                                All Actions <i class="mdi mdi-chevron-down"></i>
+                            </button>
+                            <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdownMenuButton">
+                                <li><button class="dropdown-item" type="button" onclick="previewPDF()">Preview</button></li>
+                                <li><button class="dropdown-item" type="button" onclick="openHeaderOrFooterModal()">Header/Footer</button></li>
+                                <li><button class="dropdown-item" type="button" onclick="openpricemodal('{{$contract->id}}')">Add Price</button></li>
+                                <li><button class="dropdown-item" type="button" onclick="openproductmodal()">Product</button></li>
+                                <li><button class="dropdown-item" type="button" onclick="openModalNew('{{$contract->id}}')">Variable</button></li>
+                                <li><button class="dropdown-item" type="button" id="signbutton">Signature</button></li>
+                                <!-- <li><button class="dropdown-item" type="button" onclick="saveData()">Update</button></li> -->
+                            </ul>
+                        </div>
+
+                        <button type="button" class="btn btn-success me-2 btn-lg" style="margin-left: 2px;" onclick="saveData()">Update</button>
                     </div>
 
                    
@@ -206,8 +229,6 @@ $(document).ready(function () {
       });
 
 </script>
-
-
  
     <!-- Product Modal -->
     <div class="modal" id="exampleModalProduct" tabindex="-1" aria-labelledby="exampleModalLabelNew" aria-hidden="true" data-bs-backdrop="static">
@@ -305,6 +326,188 @@ $(document).ready(function () {
       });
         </script>
 
+    <!-- price Modal -->
+    <div class="modal" id="exampleModalPrice" tabindex="-1" aria-labelledby="exampleModalLabelNew" aria-hidden="true" data-bs-backdrop="static">
+        <div class="modal-dialog modal-dialog-centered modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabelNew">Price List</h5>
+                    <div class="col-sm">
+                        <div class="search-box me-2 d-inline-block">
+                            <div class="position-relative">
+                                <input type="text" class="form-control" autocomplete="off" id="searchInputprice" placeholder="Search...">
+                                <i class="bx bx-search-alt search-icon"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body" style="max-height: 400px; overflow-y: auto;">
+                    <form id="priceFormNew" action="/get-price-lists" method="POST">
+                        <!-- for table -->
+                        <meta charset="UTF-8">
+                        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+                        <table id="PriceList" action="/get-price-lists" method="POST" class="table">
+                            <thead>
+                                <tr>
+                                    <th>Price ID</th>
+                                    <th>price Name</th>
+                                    <th>Currency</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach($priceLists as $product)
+                                <tr>
+                                    <td>{{ $product->id }}</td>
+                                    <td>{{ $product->pricename }}</td>
+                                    <td>{{ $product->currency }}</td>
+                                    <td>
+                                        <!-- Checkbox to select product -->
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" value="{{$contract->id}},{{ $product->id }},{{ $product->pricename }}" id="priceCheckbox_{{ $product->id }}" name="selectedPrice">
+                                            <!-- <label class="form-check-label" for="priceCheckbox_{{ $product->id }}">
+                                                Add
+                                            </label> -->
+                                        </div>
+                                    </td>
+                                </tr>
+                                @endforeach
+                            </tbody>
+                        </table>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                   <button type="button" class="btn btn-primary" onclick="" id="addPriceButton" data-bs-dismiss="modal" disabled>Add</button>
+
+                    <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Close</button>
+                    <!-- <button type="button" class="btn btn-primary" onclick="">Save Product</button> -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+ 
+       <!--  for select price modal checkbox -->
+        <script>
+        
+        document.addEventListener("DOMContentLoaded", function() {
+            var checkboxes = document.querySelectorAll('#exampleModalPrice input[type="checkbox"]');
+            var addPriceButton = document.getElementById('addPriceButton');
+
+            checkboxes.forEach(function(checkbox) {
+                checkbox.addEventListener('change', function() {
+                    checkboxes.forEach(function(cb) {
+                        if (cb !== checkbox) {
+                            cb.checked = false;
+                        }
+                    });
+
+                    if (checkbox.checked) {
+               
+                        addPriceButton.disabled = false;
+                        var selectedPriceId = null;
+                        // Splitting the value to get both contractId and productId
+                        var ids = checkbox.value.split(',');
+                        console.log('my value :' ,ids );
+                        selectedPriceId = {
+                            contractId: ids[0],
+                            productId: ids[1],
+                            pricename: ids[2]
+                        };
+                        console.log('selectedPriceId :', selectedPriceId);
+                        // addPriceButton.addEventListener('click', function() {
+                        //     // call insertprice logic when the button is clicked
+                        //     insertprice(selectedPriceId.pricename);
+                        //     console.log('Add button clicked!');
+                        // });
+                        // insert $PRICE$ in Ckeditor 
+                         addPriceButton.addEventListener('click', function(event) {
+                            // call insertprice logic when the button is clicked
+                            insertprice(selectedPriceId.pricename);
+                            console.log('Add button clicked!   selectedPriceId.pricename ' , selectedPriceId.pricename);
+                            
+                            // Remove the event listener after it has been triggered
+                            addPriceButton.removeEventListener('click', arguments.callee);
+                        });
+
+
+                        var csrfToken = $('meta[name="csrf-token"]').attr('content');    
+                        if (selectedPriceId !== null) {
+                            $.ajax({
+                                url: '/insert-price-id', // Replace with your route
+                                method: 'POST',
+                                data: {
+                                    contractId: selectedPriceId.contractId,
+                                    productId: selectedPriceId.productId
+                                },
+                                headers: {
+                                    'X-CSRF-TOKEN': csrfToken
+                                },
+                                success: function(response) {
+                                    // Handle success response
+                                    console.log(response);
+                                },
+                                error: function(xhr, status, error) {
+                                    // Handle error
+                                    console.error('Error:', error);
+                                }
+                            });
+                        }
+                    } else {
+                        addPriceButton.disabled = true;
+                        // If checkbox is unchecked, trigger AJAX call to delete price ID
+                        var selectedPriceId = null;
+                        var ids = checkbox.value.split(',');
+                        selectedPriceId = {
+                            contractId: ids[0],
+                            productId: ids[1]
+                        };
+                        
+                        var csrfToken = $('meta[name="csrf-token"]').attr('content');
+                        if (selectedPriceId !== null) {
+                            $.ajax({
+                                url: '/delete-price-id', // Replace with your delete route
+                                method: 'POST',
+                                data: {
+                                    contractId: selectedPriceId.contractId
+                                },
+                                headers: {
+                                    'X-CSRF-TOKEN': csrfToken
+                                },
+                                success: function(response) {
+                                    // Handle success response
+                                    console.log(response);
+                                },
+                                error: function(xhr, status, error) {
+                                    // Handle error
+                                    console.error('Error:', error);
+                                }
+                            });
+                        }
+                    }
+                });
+            });
+        });
+
+
+        $(document).ready(function () {
+        // Reference to the input field and the table
+        var $searchInput = $('#searchInputprice');
+        var $table = $('#PriceList');
+
+        // Event listener for keyup on the search input
+        $searchInput.on('keyup', function () {
+            var searchText = $(this).val().toLowerCase();
+
+            // Filter the table rows based on the search text
+            $table.find('tbody tr').filter(function () {
+                $(this).toggle($(this).text().toLowerCase().indexOf(searchText) > -1);
+            });
+        });
+      });
+        </script>
+
 @endsection
 
 @section('script')
@@ -312,15 +515,16 @@ $(document).ready(function () {
 <script src="https://cdn.ckeditor.com/ckeditor5/40.1.0/super-build/ckeditor.js"></script> -->
 <link href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css" rel="stylesheet">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
-
-<!--  classic CSKEDitor  -->
-  <script src="https://cdn.ckeditor.com/ckeditor5/41.1.0/classic/ckeditor.js"></script>  
-
 <!-- image resize CDN but not good
     <script src="https://cdn.jsdelivr.net/npm/ckeditor5-build-classic-with-image-resize@12.4.0/build/ckeditor.min.js"></script> -->
 <!--  decoupled document CSKEDitor  -->
 <!-- <script src="https://cdn.ckeditor.com/ckeditor5/41.2.0/decoupled-document/ckeditor.js"></script> -->
 
+<!--  classic CSKEDitor  
+<script src="https://cdn.ckeditor.com/ckeditor5/41.1.0/classic/ckeditor.js"></script>  -->
+
+<!--  classic CSKEDitor custom build  -->
+<script src="{{ asset('js/ckeditor/build/ckeditor.js') }}"></script>
 <script>
        
        let editor; // Global variable for main CKEditor instance    
@@ -331,7 +535,10 @@ $(document).ready(function () {
           
                 ckfinder: {
                         uploadUrl: "{{ route('ckeditor.upload', ['_token' => csrf_token()]) }}",
-                    }
+                    },
+                // testing image resize plugins 
+                // plugins: [Image, ImageResize],
+                // toolbar: ['imageResize', '|', 'imageUpload', '|', 'undo', 'redo']
             }
             )
             .then(createdEditor => {
@@ -345,6 +552,17 @@ $(document).ready(function () {
                     if (currentPosition) {
                         editor.model.change(writer => {
                             writer.insertText("%"+variableName+"%", currentPosition);
+                        });
+                    }
+                }
+
+                window.insertprice = function(variableName) {
+                    // Insert variableName at the current cursor position
+                    const currentPosition = editor.model.document.selection.getLastPosition();
+                    var priceString = 'PRICE';
+                    if (currentPosition) {
+                        editor.model.change(writer => {
+                            writer.insertText("$"+priceString+"$", currentPosition);
                         });
                     }
                 }
@@ -390,72 +608,72 @@ $(document).ready(function () {
         // }
 
         function previewPDF() {
-    // Get data from CKEditor
-    var editorData = editor.getData();
+            // Get data from CKEditor
+            var editorData = editor.getData();
 
-    // Get selected header or footer data
-    var headerDropdown = document.getElementById('dropdown1');
-    var footerDropdown = document.getElementById('dropdown3');
-    var headerValue = headerDropdown.options[headerDropdown.selectedIndex].text;
-    var footerValue = footerDropdown.options[footerDropdown.selectedIndex].text;
+            // Get selected header or footer data
+            var headerDropdown = document.getElementById('dropdown1');
+            var footerDropdown = document.getElementById('dropdown3');
+            var headerValue = headerDropdown.options[headerDropdown.selectedIndex].text;
+            var footerValue = footerDropdown.options[footerDropdown.selectedIndex].text;
 
-    // Determine if header or footer is selected for first or every page
-    var headerLocation = document.getElementById('dropdown2').value;
-    var footerLocation = document.getElementById('dropdown4').value;
+            // Determine if header or footer is selected for first or every page
+            var headerLocation = document.getElementById('dropdown2').value;
+            var footerLocation = document.getElementById('dropdown4').value;
 
-    // Check if header checkbox is checked
-    var headerCheckbox = document.getElementById('checkbox1').checked;
+            // Check if header checkbox is checked
+            var headerCheckbox = document.getElementById('checkbox1').checked;
 
-    // Check if footer checkbox is checked
-    var footerCheckbox = document.getElementById('checkbox2').checked;
+            // Check if footer checkbox is checked
+            var footerCheckbox = document.getElementById('checkbox2').checked;
 
-    // Construct title text including selected header or footer values
-    var titleHeader = "";
-    var titleFooter = "";
+            // Construct title text including selected header or footer values
+            var titleHeader = "";
+            var titleFooter = "";
 
-    // Construct header and footer based on selection
-    var headerHTML = '';
-    var footerHTML = '';
+            // Construct header and footer based on selection
+            var headerHTML = '';
+            var footerHTML = '';
 
-    // Include header if checkbox is checked and it's selected for the first page or every page
-    if (headerCheckbox) {
-        if (headerLocation === 'first' || headerLocation === 'every') {
-            titleHeader += headerValue  ;
-            headerHTML = '<div style="position: fixed; top: 20px; right: 20px;">' + headerValue + '</div>';
+            // Include header if checkbox is checked and it's selected for the first page or every page
+            if (headerCheckbox) {
+                if (headerLocation === 'first' || headerLocation === 'every') {
+                    titleHeader += headerValue  ;
+                    headerHTML = '<div style="position: fixed; top: 20px; right: 20px;">' + headerValue + '</div>';
+                }
+            }
+
+            // Include footer if checkbox is checked and it's selected for the first page or every page
+            if (footerCheckbox) {
+                if (footerLocation === 'first' || footerLocation === 'every') {
+                    titleFooter += footerValue + " - " + footerLocation;
+                    footerHTML = '<div style="position: fixed; bottom: 5px; right: 20px;">' + footerValue +  '</div>';
+                }
+            }
+
+            // Convert HTML content to PDF using jQuery
+            var myWindow = window.open('', 'PRINT', 'height=600,width=800');
+
+            myWindow.document.write('<html><title style="text-align:right">' + 
+        "Codice 1% PDF &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"+  titleHeader +'</title>');
+            myWindow.document.write('<style>@page { margin: 100px; counter-reset: page-counter; }</style>'); // Reset page counter
+            myWindow.document.write('</head><body>');
+
+            // Increment page counter for each page
+            myWindow.document.write('<div style="position: absolute; top: -50px; right: 50px;">Page: <span style="counter-increment: page-counter; content: counter(page-counter);"></span></div>');
+
+            // Write editor data
+            myWindow.document.write(editorData);
+
+            // Include footer based on selection
+            myWindow.document.write('</body><footer>' + footerHTML + '</footer></html>');
+
+            myWindow.document.close(); // necessary for IE >= 10
+            myWindow.onload = function () {
+                myWindow.print();
+                myWindow.close();
+            };
         }
-    }
-
-    // Include footer if checkbox is checked and it's selected for the first page or every page
-    if (footerCheckbox) {
-        if (footerLocation === 'first' || footerLocation === 'every') {
-            titleFooter += footerValue + " - " + footerLocation;
-            footerHTML = '<div style="position: fixed; bottom: 5px; right: 20px;">' + footerValue +  '</div>';
-        }
-    }
-
-    // Convert HTML content to PDF using jQuery
-    var myWindow = window.open('', 'PRINT', 'height=600,width=800');
-
-    myWindow.document.write('<html><title style="text-align:right">' + 
- "Codice 1% PDF &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"+  titleHeader +'</title>');
-    myWindow.document.write('<style>@page { margin: 100px; counter-reset: page-counter; }</style>'); // Reset page counter
-    myWindow.document.write('</head><body>');
-
-    // Increment page counter for each page
-    myWindow.document.write('<div style="position: absolute; top: -50px; right: 50px;">Page: <span style="counter-increment: page-counter; content: counter(page-counter);"></span></div>');
-
-    // Write editor data
-    myWindow.document.write(editorData);
-
-    // Include footer based on selection
-    myWindow.document.write('</body><footer>' + footerHTML + '</footer></html>');
-
-    myWindow.document.close(); // necessary for IE >= 10
-    myWindow.onload = function () {
-        myWindow.print();
-        myWindow.close();
-    };
-}
 
 
         // for open product modal 
@@ -465,6 +683,8 @@ $(document).ready(function () {
             myModal.show();
         }
         $('#exampleModalProduct').modal('hide');
+
+
     
         
         let arifurData = false;
@@ -515,10 +735,6 @@ $(document).ready(function () {
           arifurData = true;
     }
 
- 
-
-
-
     function saveContent(formData) {
     $.ajax({
         url: '/edit-contract-list/update', // Change the URL to the update route
@@ -527,7 +743,7 @@ $(document).ready(function () {
         success: function(response) {
             alert(response.message);
            // toastr.success("The data is updated"); 
-            window.location.href = "/Contract-List";
+           // window.location.href = "/Contract-List";
             console.log(response);
             // Optionally, you can redirect or show a success message here
         },
@@ -538,8 +754,6 @@ $(document).ready(function () {
     });
     }
  
-        
-
         //Function to insert a variable into CKEditor
         function insertVariable(variableName) {
             // Get the current content of the editor
@@ -771,7 +985,52 @@ function checkCheckbox(checkbox, variableName,  variableId) {
 
 
             // }
-         
+                 // for open price  modal 
+        // function openpricemodal(contractID) {
+        //     // Using Bootstrap's JavaScript to open the product list modal
+        //     var myModal = new bootstrap.Modal(document.getElementById('exampleModalPrice'));
+        //     myModal.show();
+        // }
+        // $('#exampleModalPrice').modal('hide');
+
+        //to open price modal
+        function openpricemodal(contractID) {
+            // AJAX call to retrieve price_id for the given contractID
+                $.ajax({
+                    url: '/get-price-id', // Replace with your route
+                    method: 'GET',
+                    data: {
+                        contractID: contractID
+                    },
+                    success: function(response) {
+                        // Open the modal
+                        var myModal = new bootstrap.Modal(document.getElementById('exampleModalPrice'));
+                        myModal.show();
+
+                        // Select the checkbox if price_id is found
+                        if (response.price_id) {
+                            var checkbox = document.getElementById('priceCheckbox_' + response.price_id);
+                            if (checkbox) {
+                                checkbox.checked = true;
+                                var addPriceButton = document.getElementById('addPriceButton');
+                                addPriceButton.disabled = false;
+                                addPriceButton.addEventListener('click', function() {
+                                    // for future ajax call to get pricename and  call insertprice logic when the button is clicked
+                                    insertprice(response.pricename);
+                                    console.log('Add button clicked!  response.price_id ' , response.pricename );
+                                       // Remove the event listener after it has been triggered
+                                    addPriceButton.removeEventListener('click', arguments.callee);
+                                });
+                            }
+                        }
+                    },
+                    error: function(xhr, status, error) {
+                        // Handle error
+                        console.error('Error:', error);
+                    }
+                });
+            }
+
  
             function openModalNew(contractID, variableIDs) {
             // AJAX request to retrieve variable IDs

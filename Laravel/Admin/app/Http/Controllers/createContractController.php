@@ -8,6 +8,7 @@ use App\Models\HeaderAndFooter;
 use App\Models\createcontract;
 use App\Models\Product;
 use App\Models\VariableList; 
+use App\Models\PriceList;
 use Illuminate\Http\RedirectResponse;
 use Dompdf\Dompdf;
 use Dompdf\Options;
@@ -23,6 +24,7 @@ class createcontractController extends Controller
         $footerEntries = HeaderAndFooter::where('type', 'Footer')->pluck('name', 'id')->toArray();
         
         $variables = VariableList::all();
+
         $products = Product::all(); 
         return view('createcontract', compact('variables','products','headerEntries','footerEntries'));
     }

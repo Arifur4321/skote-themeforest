@@ -32,13 +32,19 @@
 
             <div class="col-sm-auto">
                 <div class="text-sm-end">
-                    <button type="button" class="btn btn-primary" onclick="redirectToNewPricePage()">Add New Price</button>
+                    <button type="button" class="btn btn-primary" onclick="redirectToEditPrice()">Add New Price</button>
                 </div>
             </div>
     </div>
 
 
 <script>
+
+    function redirectToEditPrice() {
+        // Redirect to the Add-New-Price page
+        window.location.href = 'createpricewithupdate';
+    }
+
     function redirectToNewPricePage() {
         // Redirect to the Add-New-Price page
         window.location.href = 'Add-New-Price';

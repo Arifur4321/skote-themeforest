@@ -41,7 +41,6 @@
 
                     <style>
                         
-
                         .ck.ck-editor__main>.ck-editor__editable:not(.ck-focused) {
                             border-color: var(--ck-color-base-border);
                             height: 100px !important;
@@ -97,8 +96,6 @@
     </div>
 </div>
 
-
-
     <!-- Edit Modal -->
     <<div class="modal" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered modal-lg">
@@ -138,7 +135,6 @@
         </div>
     </div>
 
- 
     <!-- for table -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -246,7 +242,10 @@ $(document).ready(function() {
 <!-- arifur for search -->
 <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
 
-<script src="https://cdn.ckeditor.com/ckeditor5/41.1.0/classic/ckeditor.js"></script>
+<!-- <script src="https://cdn.ckeditor.com/ckeditor5/41.1.0/classic/ckeditor.js"></script> -->
+
+<!--  classic CSKEDitor custom build  -->
+<script src="{{ asset('js/ckeditor/build/ckeditor.js') }}"></script>
 <script>
     let editor; // Global variable for main CKEditor instance
 

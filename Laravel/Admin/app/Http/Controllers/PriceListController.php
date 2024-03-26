@@ -10,12 +10,32 @@ use App\Models\PriceList;
 class PriceListController extends Controller
 {
  
+// createpricewithupdate
+
+    public function createpricewithupdate()
+    {
+
+        // Create a new contract with only the ID incremented
+        $priceLists = new PriceList();
+        $priceLists->pricename = "Write your price name"; // Set the default value for contract_name
+        $priceLists->save();
+
+        // Get the ID of the newly created contract
+        $priceListsid = $priceLists->id;
+
+        // Redirect to the edit-contract-list page with the new contract ID
+       // return redirect()->route('edit-contract-list', ['contractId' => $contractId]);
+       echo '<script>window.location.href = "/edit-price/' . $priceListsid . '";</script>';
+    
+    }
+
+
      public function getpricedata()
     {
         $priceLists = PriceList::all(); // Fetch all PriceList records from the database
         return view('Price-List', compact('priceLists'));
     }
-
+ 
     // save all data in database
     public function savePriceList(Request $request)
     {

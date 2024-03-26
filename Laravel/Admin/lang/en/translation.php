@@ -60,7 +60,7 @@ return [
   "Projects_Grid" => "Projects Grid",
   "Projects_List" => "Projects List",
   "arifurtable" => "arifurtable",
-  "createcontract" => "createcontract",
+  "createcontract" => "New Contract",
   "Contract-List" => "Contract-List",
   "Price-List" => "Price-List",
   "Add-New-Price" => "Add-New-Price",

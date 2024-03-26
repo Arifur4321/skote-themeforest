@@ -219,41 +219,7 @@ $(document).ready(function() {
         display:none;
     }
 </style>
-
- <!-- edit Modal contract list -->
- <div   class="modal fade"  id="exampleModal" tabindex="-1" aria-labelledby="#exampleModalFullscreenLabel" aria-hidden="true" data-bs-backdrop="static">
-    <div class="modal-dialog modal-fullscreen">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="editContractModalLabel{{ $contract->id }}">Edit Contract</h5>
-                <!-- <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close"> 
-                    <span aria-hidden="true">&times;</span>-->
-                </button>
-                <div class="col-sm-auto">
-                    <div class="text-sm-end">
-                        <button type="button" class="btn btn-primary" onclick="openModalNew()">Variable</button>
-                    </div>
-                </div>
-            </div>
-            <div class="modal-body">
-                <form id="projectForm">
-                    <input type="hidden" id="contract-id" name="project_id">   
-                    <div class="mb-3">
-                        <label for="project-name-new" class="col-form-label">Contract Name :</label>
-                        <input type="text" class="form-control" id="project-name-new" value="{{ $contract-> contract_name }}">
-                    </div>
-                    <!-- CKEditor for editing contract content -->
-                    <textarea id="editormodal" name="editormodal">{{ $contract->editor_content }}</textarea>
-                </form> 
-            </div>
-            <div class="modal-footer">
-                
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary" onclick="saveEditedContent( )">Save</button>
-            </div>
-        </div>
-    </div>
-</div>
+ 
  
 <!-- variable Modal -->
 <!-- product list Modal -->

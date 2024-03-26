@@ -12,7 +12,7 @@ class CreatePriceListsTable extends Migration
         Schema::create('price_lists', function (Blueprint $table) {
             $table->id();
             $table->string('pricename');
-            $table->string('currency');
+            $table->string('currency')->nullable();
             $table->decimal('fixedvalue', 10, 2)->nullable();
             $table->decimal('dynamicminRange', 10, 2)->nullable();
             $table->decimal('dynamicmaxRange', 10, 2)->nullable();

@@ -558,7 +558,7 @@
                                     <a href="projects-list" class="dropdown-item" key="t-p-list">@lang('translation.Projects_List')</a>
                                     <a href="arifurtable"  class="dropdown-item" key="arifurtable-list">@lang('translation.arifurtable')</a>  -->
                                     
-                                    <!-- <a href="createcontract"  class="dropdown-item" key="createcontract-list">@lang('translation.createcontract')</a> -->
+                                    <!-- <a href="createcontract"  class="dropdown-item" key="createcontract-list">@lang('translation.createcontract')</a>  -->
                                     
                                     <a href="Contract-List"  class="dropdown-item" key="Contract-List">@lang('translation.Contract-List')</a>
                                     <a href="Edit-Contract-List"  class="dropdown-item" key="Edit-Contract-List">@lang('translation.Edit-Contract-List')</a>

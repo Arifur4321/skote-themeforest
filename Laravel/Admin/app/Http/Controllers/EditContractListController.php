@@ -9,11 +9,101 @@ use App\Models\HeaderAndFooter;
 use App\Models\contractvariablecheckbox; 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
- 
+use Illuminate\Support\Facades\Auth;
+//For the pricelist table
+use App\Models\PriceList;
+
 class EditContractListController extends Controller
 {
 
+   // to get price id
+//    public function getPriceId(Request $request)
+//     {
+//         $contractID = $request->input('contractID');
+
+//         // Retrieve the contract by contractID
+//         $contract = Contract::find($contractID);
+
+//         if ($contract) {
+//             // If contract is found, return the price_id
+//             return response()->json(['price_id' => $contract->price_id] );
+//         } else {
+//             // If contract is not found, return an error message
+//             return response()->json(['error' => 'Contract not found.'], 404);
+//         }
+//     }
+
+    public function getPriceId(Request $request)
+    {
+        $contractID = $request->input('contractID');
+
+        // Retrieve the contract by contractID
+        $contract = Contract::find($contractID);
+
+        if ($contract) {
+            // If contract is found, get the price_id
+            $price_id = $contract->price_id;
+
+            // Retrieve the price details from the PriceList table using the price_id
+            $price = PriceList::find($price_id);
+
+            if ($price) {
+                // If price is found, return the price_id and price name
+                return response()->json([
+                    'price_id' => $price_id,
+                    'pricename' => $price->pricename
+                ]);
+            } else {
+                // If price is not found, return an error message
+                return response()->json(['error' => 'Price details not found.'], 404);
+            }
+        } else {
+            // If contract is not found, return an error message
+            return response()->json(['error' => 'Contract not found.'], 404);
+        }
+    }
+
+
+    //insert foreign key price id 
+    public function insertPriceId(Request $request) {
+        // Retrieve the contractId and productId from the request
+        $contractId = $request->input('contractId');
+        $productId = $request->input('productId');
     
+        try {
+            // Find the contract by its ID
+            $contract = Contract::findOrFail($contractId);
+    
+            // Update the contract with the new price ID
+            $contract->price_id = $productId; // Assuming $productId is the price ID
+    
+            // Save the changes to the database
+            $contract->save();
+    
+            // Return a success response
+            return response()->json(['message' => 'Price ID inserted successfully'], 200);
+        } catch (\Exception $e) {
+            // Return an error response if something goes wrong
+            return response()->json(['error' => 'Failed to update contract.'], 500);
+        }
+    }
+    
+    //for delete foreign price id
+    public function deletePriceId(Request $request) {
+        $contractId = $request->input('contractId');
+    
+        try {
+            $contract = Contract::findOrFail($contractId);
+            $contract->price_id = null; // Assuming price_id is nullable
+            $contract->save();
+    
+            return response()->json(['message' => 'Price ID deleted successfully'], 200);
+        } catch (\Exception $e) {
+            return response()->json(['error' => 'Failed to delete price ID.'], 500);
+        }
+    }
+    
+
    // to insert contractvariablecheckbox when pop up variable is checked
 
        public function insertContractVariable(Request $request)
@@ -24,6 +114,7 @@ class EditContractListController extends Controller
    
            // Insert data into the contractvariablecheckbox table
            $contractVariable = new contractvariablecheckbox();
+           $contractVariable->LoggedinUser = Auth::user()->name;
            $contractVariable->ContractID = $contractId; // Update to match the actual column name in the table
            $contractVariable->VariableID = $variableId; // Update to match the actual column name in the table
            $contractVariable->save();
@@ -89,7 +180,7 @@ class EditContractListController extends Controller
         $headerEntries = HeaderAndFooter::where('type', 'Header')->pluck('name', 'id')->toArray();
         $footerEntries = HeaderAndFooter::where('type', 'Footer')->pluck('name', 'id')->toArray();
         $variables = VariableList::all();
-        return view('Edit-ContractList', compact('variables','headerEntries', 'footerEntries', 'loggedInUserName'));
+        return view('Edit-ContractList', compact('variables','headerEntries', 'footerEntries', 'loggedInUserName' ));
     }
 
      
@@ -101,7 +192,8 @@ class EditContractListController extends Controller
         $products = Product::all(); 
         $headerEntries = HeaderAndFooter::where('type', 'Header')->pluck('name', 'id')->toArray();
         $footerEntries = HeaderAndFooter::where('type', 'Footer')->pluck('name', 'id')->toArray();
-        return view('Edit-ContractList', compact('contract', 'variables', 'products','headerEntries', 'footerEntries'));
+        $priceLists = PriceList::all();
+        return view('Edit-ContractList', compact('contract', 'variables', 'products','headerEntries', 'footerEntries','priceLists'));
     }
     public function updateContract(Request $request)
     {

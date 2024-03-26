@@ -100,7 +100,6 @@
 </div>
 
 
-
 <script>
 function saveProduct() {
     // Get form data
@@ -131,6 +130,7 @@ function saveProduct() {
             // Handle success
             console.log('Data saved successfully.');
             // Optionally, close the modal or perform other actions.
+            location.reload();
         },
         error: function (error) {
             // Handle error

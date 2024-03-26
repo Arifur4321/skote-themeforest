@@ -17,6 +17,7 @@ class Contract extends Model
     protected $fillable = [
         'contract_name',
         'product_id',
+        'price_id',
         'editor_content',
         'logged_in_user_name',
         'image_url', // Add this line for the new column
@@ -28,5 +29,9 @@ class Contract extends Model
     public function product()
     {
         return $this->belongsTo(Product::class);
+    }
+    public function priceList()
+    {
+        return $this->belongsTo(PriceList::class, 'price_id');
     }
 }

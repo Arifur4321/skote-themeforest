@@ -522,10 +522,14 @@ function fetchVariables() {
 
 
 <script src="https://cdn.ckeditor.com/ckeditor5/41.1.0/classic/ckeditor.js"></script>
+
 <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.0.943/pdf.min.js"></script>
 
 <!-- <script src="https://cdn.ckbox.io/CKBox/2.2.0/ckbox.js"></script>
 <script src="https://cdn.ckeditor.com/ckeditor5/40.1.0/super-build/ckeditor.js"></script> -->
+
+<!--  classic CSKEDitor custom build  
+<script src="{{ asset('js/ckeditor/build/ckeditor.js') }}"></script>-->
 <script>
         // working cskditor 
         let editor; // Global variable for main CKEditor instance        

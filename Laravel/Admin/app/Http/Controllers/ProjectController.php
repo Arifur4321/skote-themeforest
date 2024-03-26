@@ -7,7 +7,6 @@ use Illuminate\Http\Request;
 
 use Illuminate\Support\Facades\DB; // Add this line
 
-
 class ProjectController extends Controller
 {
     public function saveProject(Request $request)
@@ -27,10 +26,10 @@ class ProjectController extends Controller
         return response()->json(['message' => 'Project saved successfully'], 200);
     }
 
-
     public function editProject(Request $request, $id)
     {
         // Validate the request data
+
         $request->validate([
             'projectName' => 'required|string',
             'dueDate' => 'required|date',
@@ -63,7 +62,6 @@ class ProjectController extends Controller
         $projects = Project::paginate(9); // Adjust the number based on your preference
         return view('arifurtable', ['projects' => $projects]);
     }
-
 
     
     public function updateProject(Request $request, $id)

@@ -42,7 +42,15 @@ Route::get('/arifurtable', [App\Http\Controllers\ProjectController::class, 'show
 
 // for Contractlist page  in office -----------------
 
+
 // route for PriceList 
+// web.php
+
+ 
+Route::get('/get-price-id', [App\Http\Controllers\EditContractListController::class, 'getPriceId'])->name('get.price.id');
+
+Route::post('/insert-price-id', [App\Http\Controllers\EditContractListController::class, 'insertPriceId'])->name('insert.price.id');
+Route::post('/delete-price-id', [App\Http\Controllers\EditContractListController::class, 'deletePriceId'])->name('delete.price.id');
 
 Route::delete('/price-lists/{id}', [App\Http\Controllers\PriceListController::class,'destroy'])->name('price-lists.destroy');
 
@@ -56,6 +64,7 @@ Route::post('/save-price-list', [App\Http\Controllers\PriceListController::class
  
 //land on new update page when create new contract
 Route::get('/createcontractwithupdatepage', [App\Http\Controllers\ContractController::class, 'createContractWithUpdatePage'])->name('createcontractwithupdatepage');
+Route::get('/createpricewithupdate', [App\Http\Controllers\PriceListController::class, 'createpricewithupdate'])->name('createpricewithupdate');
 
 //to see checked variable from database
 Route::post('/checkedVariable', [App\Http\Controllers\EditContractListController::class, 'checkedVariable']);
@@ -73,19 +82,15 @@ Route::post('/delete-contract-variable', [App\Http\Controllers\EditContractListC
 //Route::resource('header-and-footer', HeaderAndFooterController::class);
 Route::post('/header-and-footer/save', [App\Http\Controllers\HeaderAndFooterController::class, 'save'])->name('header-and-footer.save');
 
- 
 Route::post('/header-and-footer/{id}', [App\Http\Controllers\HeaderAndFooterController::class, 'deleteContract'])->name('entry.delete');
  
 Route::post('/header-and-footer/update/{id}', [App\Http\Controllers\HeaderAndFooterController::class, 'update'])->name('header-and-footer.update');
 
-
 Route::get('/HeaderAndFooter', [App\Http\Controllers\HeaderAndFooterController::class, 'show']);
 
- 
 //for generate preview pdf 
 
 Route::post('/generate-pdf', [App\Http\Controllers\createContractController::class, 'generatePDF']);
-
 
 // for delete contract list 
  Route::delete('contracts/{id}', [ App\Http\Controllers\ContractController::class, 'destroy'])->name('contracts.destroy');
@@ -109,11 +114,7 @@ Route::get('/Product-List', [App\Http\Controllers\ProductController::class, 'ind
 
 Route::get('/products', [App\Http\Controllers\ProductController::class, 'productforcreatepage'])->name('product.index');
 
-
 Route::post('/save-product', [App\Http\Controllers\ProductController::class, 'saveProduct']);
-
-
-
 
 //Variable-List page  to show all variable
 Route::get('/Variable-List', [ App\Http\Controllers\VariableListController::class, 'index'])->name('variable.index');
@@ -133,7 +134,6 @@ Route::get('/createcontract', [App\Http\Controllers\createContractController::cl
 
  //header footer entries
 
-
 Route::get('/createvariablecontract', [App\Http\Controllers\ContractController::class, 'show']);
 
 Route::get('/products', [App\Http\Controllers\createContractController::class, 'productforcreatepage'])->name('createcontract.productforcreatepage');
@@ -152,28 +152,17 @@ Route::post('/savecontract', [App\Http\Controllers\ContractController::class, 's
 //for image 
 Route::post('/upload', [App\Http\Controllers\ContractController::class, 'upload'])->name('ckeditor.upload');
 
-
-
 // edit purposes 
-
 // View Contract History
 Route::get('/contracts/{id}/history', [App\Http\Controllers\ContractController::class, 'history'])->name('contracts.history');
 
 // Delete Contract
 //Route::delete('/contracts/{id}', [App\Http\Controllers\ContractController::class, 'destroy'])->name('contracts.destroy');
 
- 
- 
 Route::post('/save', [App\Http\Controllers\createcontractController::class, 'save']);
-
- 
-
 
 Route::post('/updatecontract', [App\Http\Controllers\ContractController::class, 'updatecontract']);
  
-
- 
-
 Route::get('list',[App\Http\Controllers\MemberController::class,'show']);
 
 //Route::get('/projects', [App\Http\Controllers\ProjectController::class, 'showProjects'])->name('projects.index');
@@ -185,8 +174,6 @@ Route::post('/update-project/{id}', [App\Http\Controllers\ProjectController::cla
 // for delete
 Route::get('/delete/{id}', 'App\Http\Controllers\ProjectController@deleteProject');
 //Route::get('delete/(id)',ProjectController@deleteProject');
- 
-
 // to make work
 Route::get('{any}', [App\Http\Controllers\HomeController::class, 'index'])->name('index');
  

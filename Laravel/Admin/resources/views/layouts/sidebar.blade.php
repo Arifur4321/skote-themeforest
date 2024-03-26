@@ -190,7 +190,7 @@
 
                         <li><a href="/arifurtable" key="arifurtable-list">@lang('translation.arifurtable')</a></li> -->
          
-                        <!-- <li><a href="/createcontract" key="createcontract-list">@lang('translation.createcontract')</a></li>  -->
+                         <!-- <li><a href="/createcontract" key="createcontract-list">@lang('translation.createcontract')</a></li> -->
                         
                         <li><a href="/Contract-List" key="Contract-List">@lang('translation.Contract-List')</a></li>
 
