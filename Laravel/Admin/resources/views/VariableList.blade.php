@@ -121,6 +121,7 @@
     <!-- for table -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <div class="table-responsive">
     <table id="ContractList" class="table">
     <thead>
         <tr>
@@ -216,7 +217,7 @@
     </tbody>
 </table>
  
-
+</div>
 
 <!-- For pagination  -->
 <script>

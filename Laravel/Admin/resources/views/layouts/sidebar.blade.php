@@ -201,7 +201,8 @@
                         
                         <li><a href="/Variable-List" key="Variable-List">@lang('translation.Variable-List')</a></li> 
                         <li><a href="/Price-List" key="Price-List">@lang('translation.Price-List')</a></li>    
-                        <li><a href="/Add-New-Price" key="Add-New-Price">@lang('translation.Add-New-Price')</a></li>   
+
+                        <!-- <li><a href="/Add-New-Price" key="Add-New-Price">@lang('translation.Add-New-Price')</a></li>    -->
             
                         <li><a href="/HeaderAndFooter" key="HeaderAndFooter">@lang('translation.HeaderAndFooter')</a></li>   
 

@@ -101,57 +101,60 @@ window.onbeforeunload = function() {
         }
     </script>
 
-
     <div class="card">
             <div class="card-body">
                 <form id="editpagenew">
                     <input type="hidden" id="contract-id" value="{{ $contract->id }}">
                     
-                    <div class="d-flex align-items-center mb-3">
-                        <label for="title" class="form-label me-2" style="width: 120px;">Contract Name</label>
-                        <input type="text" class="form-control w-75" id="title" name="contract_name" value="{{ $contract->contract_name }}">
-                       
-                        <!-- Preview  Button 
-                        <button type="button" onclick="previewPDF()" id="preview-button" 
-                         class="btn btn-primary me-2 btn-lg">Preview</button> 
-             
-                         <button type="button" id="HeaderOrFooter" class="btn btn-primary me-2 btn-lg" 
-                         onclick="openHeaderOrFooterModal()">Header/Footer</button>
-
-                
-                        <button type="button" class="btn btn-primary me-2 btn-lg" onclick="openpricemodal('{{$contract->id}}' )" > AddPrice</button>
-               
-                  
-                        <button type="button" class="btn btn-primary me-2 btn-lg" onclick="openproductmodal()" >Product</button>
+                     <!-- For larger screens (md and above) -->
+                     <div class="d-none d-md-flex align-items-center mb-3">
+                            <label for="title" class="form-label me-2" style="width: 120px;">Contract Name</label>
+                            <input type="text" class="form-control w-75" id="title" name="contract_name" value="{{ $contract->contract_name }}">
+                            
+                            <div class="dropdown" style="margin-left: 3px;">
+                                <button type="button" class="btn btn-primary dropdown-toggle btn-lg" data-bs-toggle="dropdown" aria-expanded="false">
+                                    All Actions <i class="mdi mdi-chevron-down"></i>
+                                </button>
+                                <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdownMenuButton">
+                                    <li><button class="dropdown-item" type="button" onclick="previewPDF()">Preview</button></li>
+                                    <li><button class="dropdown-item" type="button" onclick="openHeaderOrFooterModal()">Header/Footer</button></li>
+                                    <li><button class="dropdown-item" type="button" onclick="openpricemodal('{{$contract->id}}')">Add Price</button></li>
+                                    <li><button class="dropdown-item" type="button" onclick="openproductmodal()">Product</button></li>
+                                    <li><button class="dropdown-item" type="button" onclick="openModalNew('{{$contract->id}}')">Variable</button></li>
+                                    <li><button class="dropdown-item" type="button" id="signbutton">Signature</button></li>
+                                    <!-- <li><button class="dropdown-item" type="button" onclick="saveData()">Update</button></li> -->
+                                </ul>
+                            </div>
                         
-                   
-                        <button type="button" class="btn btn-primary me-2 btn-lg" onclick="openModalNew('{{$contract->id}}' )">Variable</button>
-                    
-                        <button type="button" id="signbutton" class="btn btn-primary me-2 btn-lg" >  Signature </button>
-                     
-                        <button type="button" class="btn btn-success me-2 btn-lg" onclick="saveData()">Update</button>
-                        -->
-                       <!-- All button dropdown together in Action  -->
-                       
-                        <div class="dropdown" style="margin-left: 3px;">
-                            <button type="button" class="btn btn-primary dropdown-toggle btn-lg" data-bs-toggle="dropdown" aria-expanded="false">
-                                All Actions <i class="mdi mdi-chevron-down"></i>
-                            </button>
-                            <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdownMenuButton">
-                                <li><button class="dropdown-item" type="button" onclick="previewPDF()">Preview</button></li>
-                                <li><button class="dropdown-item" type="button" onclick="openHeaderOrFooterModal()">Header/Footer</button></li>
-                                <li><button class="dropdown-item" type="button" onclick="openpricemodal('{{$contract->id}}')">Add Price</button></li>
-                                <li><button class="dropdown-item" type="button" onclick="openproductmodal()">Product</button></li>
-                                <li><button class="dropdown-item" type="button" onclick="openModalNew('{{$contract->id}}')">Variable</button></li>
-                                <li><button class="dropdown-item" type="button" id="signbutton">Signature</button></li>
-                                <!-- <li><button class="dropdown-item" type="button" onclick="saveData()">Update</button></li> -->
-                            </ul>
+                            <button type="button" class="btn btn-success me-2 btn-lg" style="margin-left: 2px;" onclick="saveData()">Update</button>
                         </div>
-
-                        <button type="button" class="btn btn-success me-2 btn-lg" style="margin-left: 2px;" onclick="saveData()">Update</button>
+                        
+                        <div class="d-md-none mb-3">
+                            <!-- Insert the responsive HTML code here  lower screen-->
+                            
+                            <div class="d-flex flex-wrap align-items-center mb-3">
+                            <label for="title" class="form-label me-2" style="flex: 0 0 120px;">Contract Name</label>
+                            <input type="text" class="form-control flex-grow-1 mb-2 mb-md-0" id="title" name="contract_name" value="{{ $contract->contract_name }}">
+                            
+                            <div class="dropdown" style="margin-left: 3px;">
+                                <button type="button" class="btn btn-primary dropdown-toggle btn-lg" data-bs-toggle="dropdown" aria-expanded="false">
+                                    All Actions <i class="mdi mdi-chevron-down"></i>
+                                </button>
+                                <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdownMenuButton">
+                                    <li><button class="dropdown-item" type="button" onclick="previewPDF()">Preview</button></li>
+                                    <li><button class="dropdown-item" type="button" onclick="openHeaderOrFooterModal()">Header/Footer</button></li>
+                                    <li><button class="dropdown-item" type="button" onclick="openpricemodal('{{$contract->id}}')">Add Price</button></li>
+                                    <li><button class="dropdown-item" type="button" onclick="openproductmodal()">Product</button></li>
+                                    <li><button class="dropdown-item" type="button" onclick="openModalNew('{{$contract->id}}')">Variable</button></li>
+                                    <li><button class="dropdown-item" type="button" id="signbutton">Signature</button></li>
+                                    <!-- <li><button class="dropdown-item" type="button" onclick="saveData()">Update</button></li> -->
+                                </ul>
+                            </div>
+                        
+                            <button type="button" class="btn btn-success btn-lg" style="margin-left: 2px;" onclick="saveData()">Update</button>
+                        </div>
                     </div>
 
-                   
                 <!-- For licensed CKEditor 
                      <div id="presence-list-container"></div>
                     <div id="editor-container">
@@ -190,23 +193,19 @@ window.onbeforeunload = function() {
             </div>
         </div>
 
-<!-- 
-<script>
-    
-    $(document).ready(function() {
-            $('.add-checkbox').each(function() {
-                var variableId = $(this).data('variable-id');
-                var isChecked = localStorage.getItem('isChecked_' + variableId);
-                if (isChecked === 'true') {
-                    $(this).prop('checked', true);
-                }
-            });
-        });
-
-
-
-</script> 
--->
+        <!-- 
+        <script>
+            $(document).ready(function() {
+                    $('.add-checkbox').each(function() {
+                        var variableId = $(this).data('variable-id');
+                        var isChecked = localStorage.getItem('isChecked_' + variableId);
+                        if (isChecked === 'true') {
+                            $(this).prop('checked', true);
+                        }
+                    });
+                });
+        </script> 
+        -->
 
 
 
@@ -388,10 +387,10 @@ $(document).ready(function () {
     </div>
 
  
-       <!--  for select price modal checkbox -->
-        <script>
+<!--  for select price modal checkbox -->
+    <script>
         
-        document.addEventListener("DOMContentLoaded", function() {
+         document.addEventListener("DOMContentLoaded", function() {
             var checkboxes = document.querySelectorAll('#exampleModalPrice input[type="checkbox"]');
             var addPriceButton = document.getElementById('addPriceButton');
 
@@ -422,15 +421,6 @@ $(document).ready(function () {
                         //     console.log('Add button clicked!');
                         // });
                         // insert $PRICE$ in Ckeditor 
-                         addPriceButton.addEventListener('click', function(event) {
-                            // call insertprice logic when the button is clicked
-                            insertprice(selectedPriceId.pricename);
-                            console.log('Add button clicked!   selectedPriceId.pricename ' , selectedPriceId.pricename);
-                            
-                            // Remove the event listener after it has been triggered
-                            addPriceButton.removeEventListener('click', arguments.callee);
-                        });
-
 
                         var csrfToken = $('meta[name="csrf-token"]').attr('content');    
                         if (selectedPriceId !== null) {
@@ -454,7 +444,8 @@ $(document).ready(function () {
                                 }
                             });
                         }
-                    } else {
+                    }   
+                    else {
                         addPriceButton.disabled = true;
                         // If checkbox is unchecked, trigger AJAX call to delete price ID
                         var selectedPriceId = null;
@@ -463,33 +454,50 @@ $(document).ready(function () {
                             contractId: ids[0],
                             productId: ids[1]
                         };
-                        
+
                         var csrfToken = $('meta[name="csrf-token"]').attr('content');
-                        if (selectedPriceId !== null) {
-                            $.ajax({
-                                url: '/delete-price-id', // Replace with your delete route
-                                method: 'POST',
-                                data: {
-                                    contractId: selectedPriceId.contractId
-                                },
-                                headers: {
-                                    'X-CSRF-TOKEN': csrfToken
-                                },
-                                success: function(response) {
-                                    // Handle success response
-                                    console.log(response);
-                                },
-                                error: function(xhr, status, error) {
-                                    // Handle error
-                                    console.error('Error:', error);
+                        $.ajax({
+                            url: '/delete-price-id', // Replace with your delete route
+                            method: 'POST',
+                            data: {
+                                contractId: selectedPriceId.contractId
+                            },
+                            headers: {
+                                'X-CSRF-TOKEN': csrfToken
+                            },
+                            success: function(response) {
+                                // Handle success response
+                                console.log(response);
+                                // Show confirmation dialog
+                                var confirmed = window.confirm("Do you want to delete the price?");
+                                if (confirmed) {
+                                    deletePriceFromCKEditor();
+                                } else {
+                                  //  addPriceButton.disabled = false;
+                                  //  checkbox.checked = true;
                                 }
-                            });
-                        }
+                                $('#exampleModalPrice').modal('hide');
+                            },
+                            error: function(xhr, status, error) {
+                                // Handle error
+                                console.error('Error:', error);
+                            }
+                        });
                     }
+
                 });
             });
         });
 
+        //addPriceButton.removeEventListener('click', arguments.callee);
+        // addPriceButton.addEventListener('click', function(event) {
+        //                     // call insertprice logic when the button is clicked
+        //                     var price = 'price';
+        //                     insertprice(price);
+        //                     console.log('Add button clicked! 1st time');
+        //                     // Remove the event listener after it has been triggered
+        //                     addPriceButton.removeEventListener('click', arguments.callee);
+        // });
 
         $(document).ready(function () {
         // Reference to the input field and the table
@@ -607,6 +615,16 @@ $(document).ready(function () {
         //     };
         // }
 
+        // Function to delete "$PRICE$" string from CKEditor content
+        function deletePriceFromCKEditor() {
+            var priceRegex = /\$PRICE\$/g; // Regular expression to match all occurrences of "$PRICE$"
+            var editorData = editor.getData();
+            var newData = editorData.replace(priceRegex, ''); // Replace all occurrences of "$PRICE$" with an empty string
+            editor.data.set(newData, { suppressErrorInCollaboration: true });
+            console.log('I am here at deletePriceFromCKEditor');
+        }
+
+
         function previewPDF() {
             // Get data from CKEditor
             var editorData = editor.getData();
@@ -614,8 +632,12 @@ $(document).ready(function () {
             // Get selected header or footer data
             var headerDropdown = document.getElementById('dropdown1');
             var footerDropdown = document.getElementById('dropdown3');
-            var headerValue = headerDropdown.options[headerDropdown.selectedIndex].text;
-            var footerValue = footerDropdown.options[footerDropdown.selectedIndex].text;
+           //var headerValue = headerDropdown.options[headerDropdown.selectedIndex].text;
+           // var footerValue = footerDropdown.options[footerDropdown.selectedIndex].text;
+
+            var headerValue = headerDropdown.selectedIndex !== -1 ? headerDropdown.options[headerDropdown.selectedIndex].text : null;
+            var footerValue = footerDropdown.selectedIndex !== -1 ? footerDropdown.options[footerDropdown.selectedIndex].text : null;
+
 
             // Determine if header or footer is selected for first or every page
             var headerLocation = document.getElementById('dropdown2').value;
@@ -775,49 +797,6 @@ $(document).ready(function () {
             var regex = new RegExp(searchValue, 'g');
             return str.replace(regex, '');
         }
-
-        // Function to handle checkbox change event  Main working one ----------------
-     
-        // function checkCheckbox(checkbox, variableName  ) {
-        //     var $row = $(checkbox).closest('tr'); // Find the parent row
-
-        //     if (checkbox.checked) {
-        //         $row.find('.add-button').prop('disabled', false); // Enable button if checkbox is checked
-        //     } else {
-        //         var editorData = editor.getData();
-        //         var count = countOccurrences(editorData, variableName);
-
-        //         if (count > 0) {
-        //             Swal.fire({
-        //                 title: 'Variable Found!',
-        //                 text: 'The variable ' + variableName + ' appears ' + count + ' times in the editor content. Do you want to delete it?',
-        //                 icon: 'warning',
-        //                 showCancelButton: true,
-        //                 confirmButtonText: 'Yes, delete it',
-        //                 cancelButtonText: 'No, cancel',
-        //                 reverseButtons: true
-        //             }).then((result) => {
-        //                 if (result.isConfirmed) {
-        //                     var latestvar = "%" + variableName + "%"
-        //                     editorData = deleteSubstring(editorData, latestvar);
-        //                     //editor.setData(editorData);
-        //                     editor.data.set(  editorData, { suppressErrorInCollaboration: true } )
-        //                 } else {
-        //                     // If user cancels deletion, recheck the checkbox
-        //                     checkbox.checked = true;
-        //                     $row.find('.add-button').prop('disabled', false); // Enable button as checkbox is checked
-        //                 }
-        //             });
-        //         } else {
-        //             // If no occurrences found, enable button directly
-        //             $row.find('.add-button').prop('disabled', false);
-        //         }
-        //     }
-        // }
-
-
-        // testing one for contractvariablecheckbox -------------------
-
     
 
 function checkCheckbox(checkbox, variableName,  variableId) {
@@ -925,73 +904,6 @@ function checkCheckbox(checkbox, variableName,  variableId) {
 }
 
 
-// for delete the row from contractvariablecheckbox table
-                    // $.ajax({
-                    //     url: '/delete-contract-variable',
-                    //     method: 'POST',
-                    //     data: {
-                    //         _token: "{{ csrf_token() }}",
-                    //         contract_id: contractId,
-                    //         variable_id: variableId
-                    //     },
-                    //     success: function(response) {
-                         
-                             
-                    //     },
-
-                    //     error: function(xhr, status, error) {
-                             
-                    //     }
-                    // }); 
-
-                    //--------------
-                    // Perform delete operation
-
-//------------------------------
-
-
-
-
-            // function openModalNew(contractID) {
-            //     var contractID=contractID ;
-            //     $.ajax({
-            //             url: '/checkedVariable',
-            //             method: 'POST',
-            //             data: {
-            //                 _token: "{{ csrf_token() }}",
-            //                 contract_id: contractID
-                            
-            //             },
-
-            //             success: function(response) {
-            //                 // check how many variable are there  
-
-            //                 // Loop through the response data and check the checkboxes in the table
-            //                 response.forEach(function(variableID) {
-            //                     $('#ContractList input[type="checkbox"][value="' + variableID + '"]').prop('checked', true);
-            //                 });
-                
-            //             },
-
-            //             error: function(xhr, status, error) {
-                             
-            //             }
-            //         });
-
-
-            //     // Using Bootstrap's JavaScript to open the product list modal
-            //     var myModal = new bootstrap.Modal(document.getElementById('exampleModalNew'));
-            //     myModal.show();
-
-
-            // }
-                 // for open price  modal 
-        // function openpricemodal(contractID) {
-        //     // Using Bootstrap's JavaScript to open the product list modal
-        //     var myModal = new bootstrap.Modal(document.getElementById('exampleModalPrice'));
-        //     myModal.show();
-        // }
-        // $('#exampleModalPrice').modal('hide');
 
         //to open price modal
         function openpricemodal(contractID) {
@@ -1014,13 +926,9 @@ function checkCheckbox(checkbox, variableName,  variableId) {
                                 checkbox.checked = true;
                                 var addPriceButton = document.getElementById('addPriceButton');
                                 addPriceButton.disabled = false;
-                                addPriceButton.addEventListener('click', function() {
-                                    // for future ajax call to get pricename and  call insertprice logic when the button is clicked
-                                    insertprice(response.pricename);
-                                    console.log('Add button clicked!  response.price_id ' , response.pricename );
-                                       // Remove the event listener after it has been triggered
-                                    addPriceButton.removeEventListener('click', arguments.callee);
-                                });
+                                //addPriceButton.removeEventListener('click', arguments.callee);
+                            
+
                             }
                         }
                     },
@@ -1029,6 +937,16 @@ function checkCheckbox(checkbox, variableName,  variableId) {
                         console.error('Error:', error);
                     }
                 });
+
+                addPriceButton.addEventListener('click', function() {
+                                    // for future ajax call to get pricename and  call insertprice logic when the button is clicked
+                                  
+                                    insertprice('price');
+                                    console.log('Add button clicked!  2nd time  ' );
+                                       // Remove the event listener after it has been triggered
+                                    addPriceButton.removeEventListener('click', arguments.callee);
+                                    
+                                });
             }
 
  

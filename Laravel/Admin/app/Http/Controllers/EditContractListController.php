@@ -17,52 +17,51 @@ class EditContractListController extends Controller
 {
 
    // to get price id
-//    public function getPriceId(Request $request)
-//     {
-//         $contractID = $request->input('contractID');
+    // public function getPriceId(Request $request)
+    // {
+    //     $contractID = $request->input('contractID');
 
-//         // Retrieve the contract by contractID
-//         $contract = Contract::find($contractID);
+    //     // Retrieve the contract by contractID
+    //     $contract = Contract::find($contractID);
 
-//         if ($contract) {
-//             // If contract is found, return the price_id
-//             return response()->json(['price_id' => $contract->price_id] );
-//         } else {
-//             // If contract is not found, return an error message
-//             return response()->json(['error' => 'Contract not found.'], 404);
-//         }
-//     }
+    //     if ($contract) {
+    //         // If contract is found, get the price_id
+    //         $price_id = $contract->price_id;
 
-    public function getPriceId(Request $request)
-    {
-        $contractID = $request->input('contractID');
+    //         // Retrieve the price details from the PriceList table using the price_id
+    //         $price = PriceList::find($price_id);
 
-        // Retrieve the contract by contractID
-        $contract = Contract::find($contractID);
+    //         if ($price) {
+    //             // If price is found, return the price_id and price name
+    //             return response()->json([
+    //                 'price_id' => $price_id,
+    //                 'pricename' => $price->pricename
+    //             ]);
+    //         } else {
+    //             // If price is not found, return an error message
+    //             return response()->json(['error' => 'Price details not found.'], 404);
+    //         }
+    //     } else {
+    //         // If contract is not found, return an error message
+    //         return response()->json(['error' => 'Contract not found.'], 404);
+    //     }
+    // }
 
-        if ($contract) {
-            // If contract is found, get the price_id
-            $price_id = $contract->price_id;
+       public function getPriceId(Request $request)
+        {
+            $contractID = $request->input('contractID');
 
-            // Retrieve the price details from the PriceList table using the price_id
-            $price = PriceList::find($price_id);
+            // Retrieve the contract by contractID
+            $contract = Contract::find($contractID);
 
-            if ($price) {
-                // If price is found, return the price_id and price name
-                return response()->json([
-                    'price_id' => $price_id,
-                    'pricename' => $price->pricename
-                ]);
+            if ($contract) {
+                // If contract is found, return the price_id
+                return response()->json(['price_id' => $contract->price_id] );
             } else {
-                // If price is not found, return an error message
-                return response()->json(['error' => 'Price details not found.'], 404);
+                // If contract is not found, return an error message
+                return response()->json(['error' => 'Contract not found.'], 404);
             }
-        } else {
-            // If contract is not found, return an error message
-            return response()->json(['error' => 'Contract not found.'], 404);
         }
-    }
-
 
     //insert foreign key price id 
     public function insertPriceId(Request $request) {

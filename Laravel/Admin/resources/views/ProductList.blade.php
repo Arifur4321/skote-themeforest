@@ -220,20 +220,12 @@ function saveProduct() {
 
 </script>
 
-
-
-
-
-
 <script>
     function redirectTocreatecontract() {
         // Redirect to the route associated with createcontract.blade.php
         window.location.href = "/createcontract"; // Replace with your actual route path
     }
 </script>
-
-
-
 
 <!-- Modal -->
 <div class="modal" id="exampleModalNew" tabindex="-1" aria-labelledby="exampleModalLabelNew" aria-hidden="true">
@@ -267,11 +259,8 @@ function saveProduct() {
     </div>
 </div>
 
-
-
-    <!-- for table -->
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- For Main table -->
+    <div class="table-responsive">
     <table id="ContractList" class="table">
     <thead>
         <tr>
@@ -339,10 +328,9 @@ function saveProduct() {
         </div>
     </div>
 </td>
+</tr>
 
-        </tr>
-
-        <!-- Modal for Editing Contract -->
+<!-- Modal for Editing Contract -->
         <div class="modal fade" id="editContractModal{{ $contract->id }}" tabindex="-1" role="dialog" aria-labelledby="editContractModalLabel{{ $contract->id }}" aria-hidden="true">
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
@@ -366,6 +354,8 @@ function saveProduct() {
         @endforeach
     </tbody>
 </table>
+</div>
+
 <span>
  
 </span>
@@ -375,8 +365,6 @@ function saveProduct() {
         display:none;
     }
 </style>
-
-
 
 <!-- For pagination  -->
 <script>
@@ -414,9 +402,6 @@ $(document).ready(function() {
                 myModal.show();
             }
         
-
-          
-
         function saveContent(title, content) {
             // Send title and content to Laravel backend using AJAX
             $.ajax({
@@ -463,7 +448,5 @@ $(document).ready(function() {
         }
 
     </script>
-
-
 @endsection
 @endsection

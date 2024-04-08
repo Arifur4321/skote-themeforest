@@ -74,6 +74,9 @@
 
 
 <!-- Table content -->
+<div class="table-responsive">
+
+
 <table id="ContractList" class="table">
     <!-- Table header -->
     <thead>
@@ -89,7 +92,9 @@
     <!-- Table body -->
     <tbody>
         @foreach($contracts as $contract)
-        <tr>
+ 
+        <tr class="d-sm-table-row">
+            
             <td>{{ $contract->id }}</td>
             <td>{{ $contract->contract_name }}</td>
             <!-- <td>{{ $contract->logged_in_user_name }}</td> -->
@@ -144,7 +149,7 @@
         @endforeach
     </tbody>
 </table>
-
+</div>
 <!-- For pagination  -->
 <script>
 //    let table = new DataTable('#ContractList');

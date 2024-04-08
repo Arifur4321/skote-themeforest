@@ -57,6 +57,8 @@ class PriceListController extends Controller
         $priceList->paymentMinRange = $request->minPaymentRange;
         $priceList->paymentMaxRange = $request->maxPaymentRange;
         $priceList->paymentExampleText = $request->minPayment;
+        $priceList->frequency=   $request->frequency;
+        $priceList->EditableDates=   $request->EditableDates;
          
         // Save query the model to the database
         $priceList->save();
@@ -116,6 +118,8 @@ class PriceListController extends Controller
             'paymentMinRange' => $request->paymentMinRange,
             'paymentMaxRange' => $request->paymentMaxRange,
             'paymentExampleText' => $request->paymentExampleText,
+            'frequency' => $request->frequency,
+            'EditableDates'  => $request-> EditableDates,
         ]);
 
         return redirect()->route('get.data')->with('success', 'PriceList updated successfully');

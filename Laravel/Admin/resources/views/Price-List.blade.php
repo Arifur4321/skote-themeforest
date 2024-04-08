@@ -52,6 +52,7 @@
 </script>
 
 <!-- Table content -->
+<div class="table-responsive">
 <table id="PriceList" class="table">
     <!-- Table header -->
     <thead>
@@ -95,7 +96,7 @@
         @endforeach
     </tbody>
 </table>
- 
+</div>
 <script>
 //    let table = new DataTable('#ContractList');
 $(document).ready(function() {

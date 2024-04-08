@@ -24,6 +24,8 @@ class PriceList extends Model
         'selectPriceType', 
         'singlePayment', 
         'multiplePayments', 
+        'EditableDates',
+        'frequency',
         'paymentMinRange', 
         'paymentMaxRange', 
         'paymentExampleText',
